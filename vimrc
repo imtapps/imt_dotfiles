@@ -160,8 +160,8 @@ set guioptions-=T
 "-----------------------------------------------------------------------------------
 " Show relative line numbers in cmd mode
 "-----------------------------------------------------------------------------------
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
+"autocmd InsertEnter * :set number
+"autocmd InsertLeave * :set relativenumber
 
 "-----------------------------------------------------------------------------------
 " Treat JSON files like JavaScript
