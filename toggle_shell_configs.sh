@@ -11,6 +11,9 @@ if [[ "$response" = "new" ]] ; then
     mv .vim         .vim.bak
     mv .viminfo     .viminfo.bak
     mv .vimrc       .vimrc.bak
+    
+    # Clone vundle so we can update vim plugins
+    git clone https://github.com/gmarik/vundle.git ~/new_dots/vim/bundle/vundle
 
     # Symlink the new config files. Assumes files are saved in ~/new_dots
     ln -s ~/new_dots/vim ~/.vim
