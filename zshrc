@@ -264,7 +264,8 @@ virtualenv_cd() {
 alias cd=virtualenv_cd
 
 #--------------------------------------------------------------------
-# Auto actiavted node?
+# Auto actiavted node
+# TODO activate node modules karma bin when we do this
 # -------------------------------------------------------------------
 workon_node_env() {
   if [[ -d "node_modules" ]]

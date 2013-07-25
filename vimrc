@@ -54,6 +54,10 @@ set nocompatible
  Bundle 'https://github.com/kien/ctrlp.vim'
  Bundle 'https://github.com/tpope/vim-commentary'
  Bundle 'https://github.com/davidhalter/jedi-vim'
+ Bundle 'https://github.com/ameade/qtpy-vim'
+ Bundle 'https://github.com/toranb/vim-django-support.git'
+ Bundle 'https://github.com/goldfeld/vim-seek.git'
+ Bundle 'https://github.com/taku-o/vim-copypath'
 "
 "===================================================================================
 " GENERAL SETTINGS
@@ -101,6 +105,7 @@ set listchars=tab:>.                   " A tab will be displayed as >...
 set listchars+=trail:.                 " Trailing white spaces will be displayed as .
 set mouse=a                            " enable the use of the mouse
 set nobackup                           " don't constantly write backup files
+set noswapfile
 set noerrorbells                       " don't beep
 set nowrap                             " do not wrap lines
 set popt=left:8pc,right:3pc            " print options
@@ -115,6 +120,7 @@ set undolevels=1000                    " never can be too careful when it comes 
 set visualbell                         " visual bell instead of beeping
 set wildignore=*.swp,*.bak,*.pyc,*.class,node_modules/**  " wildmenu: ignore these extensions
 set wildmenu                           " command-line completion in an enhanced mode
+set shell=bash
 "
 "-----------------------------------------------------------------------------------
 " My pimped out status line
@@ -123,16 +129,16 @@ set laststatus=2                " Make the second to last line of vim our status
 set statusline=%F                            " File path
 set statusline+=%m%r%h%w                     " Flags
 set statusline+=\ %{fugitive#statusline()}   " Git branch
-set statusline+=\ [FORMAT=%{&ff}]            " File format
-set statusline+=\ [TYPE=%Y]                  " File type
-set statusline+=\ [ASCII=\%03.3b]            " ASCII value of character under cursor
-set statusline+=\ [HEX=\%02.2B]              " HEX value of character under cursor
+" set statusline+=\ [FORMAT=%{&ff}]            " File format
+" set statusline+=\ [TYPE=%Y]                  " File type
+" set statusline+=\ [ASCII=\%03.3b]            " ASCII value of character under cursor
+" set statusline+=\ [HEX=\%02.2B]              " HEX value of character under cursor
 set statusline+=%=                           " Right align the rest of the status line
-set statusline+=\ [POS=L%04l,R%04v]          " Cursor position in the file line, row
+" set statusline+=\ [POS=L%04l,R%04v]          " Cursor position in the file line, row
 set statusline+=\ [%p%%]                     " Percentage of the file the active line is
-set statusline+=\ [LEN=%L]                   " Number of line in the file
-set statusline+=%#warningmsg#                " Highlights the syntastic errors in red
-set statusline+=%{SyntasticStatuslineFlag()} " Adds the line number and error count
+" set statusline+=\ [LEN=%L]                   " Number of line in the file
+" set statusline+=%#warningmsg#                " Highlights the syntastic errors in red
+" set statusline+=%{SyntasticStatuslineFlag()} " Adds the line number and error count
 set statusline+=%*                           " Fill the width of the vim window
 "
 "-----------------------------------------------------------------------------------
@@ -258,12 +264,8 @@ let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
 "-----------------------------------------------------------------------------------
 " Ctrlp configurations
 "-----------------------------------------------------------------------------------
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|bak|node_modules|xmlrunner)$',
-  \ 'file': '\v\.(pyc|git|bak|swp|DS_Store)$',
-  \ }
+let g:ctrlp_custom_ignore = 'node_modules$\|xmlrunner$\|.DS_Store|.git|.bak|.swp|.pyc'
 let g:ctrlp_max_height = 18
-
 "
 "-----------------------------------------------------------------------------------
 " Exuberant ctags configurations
@@ -348,9 +350,7 @@ nnoremap <leader>ff :CtrlP<CR>
 " --- shortcut to save the current document
 map .. :w<cr>
 " --- shortcut to goto the item under the cursor
-let g:jedi#goto_command = "<leader>j"
-" --- shortcut to save the current document
-let g:jedi#get_definition_command = "<leader>gd"
+let g:jedi#get_definition_command = "<leader>j"
 " -- spell check
 noremap <leader>sp :set spell spelllang=en_us<cr>
 " --- like grep on steroids
@@ -391,3 +391,10 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 " --- jj and jk For Qicker Escaping between normal and editing mode
 inoremap jj <ESC>
 inoremap jk <ESC>
+
+" Copy current buffer path relative to root of VIM session to system clipboard
+nnoremap <leader>yp :let @+=expand("%")<cr>:echo "Copied file path to clipboard"<cr>
+" Copy current filename to system clipboard
+nnoremap <Leader>yf :let @*=expand("%:t")<cr>:echo "Copied file name to clipboard"<cr>
+" Copy current buffer path without filename to system clipboard
+nnoremap <Leader>yd :let @*=expand("%:h")<cr>:echo "Copied file directory to clipboard"<cr>
