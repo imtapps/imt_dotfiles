@@ -9,5 +9,5 @@ setlocal tabstop=2
 setlocal softtabstop=2
 setlocal shiftwidth=2
 
-" goto  
+" Poor mans jump to definition short cut
 nnoremap <leader>j <C-]>

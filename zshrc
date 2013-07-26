@@ -6,6 +6,10 @@
 autoload -U colors && colors
 autoload -U compinit
 compinit -C
+#-------------------------------------------------------------------------------
+## case-insensitive (all),partial-word and then substring completion
+#-------------------------------------------------------------------------------
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 #-------------------------------------------------------------------------------
 # Local array variable
@@ -148,7 +152,8 @@ fi
 #===============================================================================
 #  Aliases
 #===============================================================================
-alias ls='ls -F --color'
+# alias ls='ls -F --color' # This is for linux breaks macs
+alias ls='ls -FHG'
 alias ll='ls -lh'
 alias la='ls -la'
 alias lls='ll -Sr'
@@ -268,8 +273,7 @@ alias cd=virtualenv_cd
 # TODO activate node modules karma bin when we do this
 # -------------------------------------------------------------------
 workon_node_env() {
-  if [[ -d "node_modules" ]]
-  then
+  if [[ -d "node_modules" ]]; then
 
     export NPM_ORIGINAL_PATH=$PATH
 

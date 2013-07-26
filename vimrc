@@ -43,7 +43,7 @@ set nocompatible
  Bundle 'https://github.com/scrooloose/nerdtree'
  Bundle 'https://github.com/JarrodCTaylor/vim-color-menu'
  Bundle 'https://github.com/tpope/vim-fugitive'
- " Must have exuberant-ctags for this to work
+ " Must have exuberant-ctags for tagbar to work
  Bundle 'https://github.com/majutsushi/tagbar'
  Bundle 'https://github.com/ervandew/supertab'
  Bundle 'https://github.com/pangloss/vim-javascript'
@@ -57,7 +57,6 @@ set nocompatible
  Bundle 'https://github.com/ameade/qtpy-vim'
  Bundle 'https://github.com/toranb/vim-django-support.git'
  Bundle 'https://github.com/goldfeld/vim-seek.git'
- Bundle 'https://github.com/taku-o/vim-copypath'
 "
 "===================================================================================
 " GENERAL SETTINGS
@@ -105,7 +104,7 @@ set listchars=tab:>.                   " A tab will be displayed as >...
 set listchars+=trail:.                 " Trailing white spaces will be displayed as .
 set mouse=a                            " enable the use of the mouse
 set nobackup                           " don't constantly write backup files
-set noswapfile
+set noswapfile                         " ain't nobody got time for swap files
 set noerrorbells                       " don't beep
 set nowrap                             " do not wrap lines
 set popt=left:8pc,right:3pc            " print options
@@ -120,26 +119,26 @@ set undolevels=1000                    " never can be too careful when it comes 
 set visualbell                         " visual bell instead of beeping
 set wildignore=*.swp,*.bak,*.pyc,*.class,node_modules/**  " wildmenu: ignore these extensions
 set wildmenu                           " command-line completion in an enhanced mode
-set shell=bash
+set shell=bash                         " Required to let zsh know how to run things on command line 
 "
 "-----------------------------------------------------------------------------------
 " My pimped out status line
 "-----------------------------------------------------------------------------------
 set laststatus=2                " Make the second to last line of vim our status line
-set statusline=%F                            " File path
-set statusline+=%m%r%h%w                     " Flags
-set statusline+=\ %{fugitive#statusline()}   " Git branch
+set statusline=%F                              " File path
+set statusline+=%m%r%h%w                       " Flags
+" set statusline+=\ %{fugitive#statusline()}   " Git branch
 " set statusline+=\ [FORMAT=%{&ff}]            " File format
 " set statusline+=\ [TYPE=%Y]                  " File type
 " set statusline+=\ [ASCII=\%03.3b]            " ASCII value of character under cursor
 " set statusline+=\ [HEX=\%02.2B]              " HEX value of character under cursor
-set statusline+=%=                           " Right align the rest of the status line
-" set statusline+=\ [POS=L%04l,R%04v]          " Cursor position in the file line, row
-set statusline+=\ [%p%%]                     " Percentage of the file the active line is
-" set statusline+=\ [LEN=%L]                   " Number of line in the file
+set statusline+=%=                             " Right align the rest of the status line
+set statusline+=\ [R%04l,C%04v]                " Cursor position in the file row, column
+" set statusline+=\ [%p%%]                     " Percentage of the file the active line is
+set statusline+=\ [LEN=%L]                     " Number of line in the file
 " set statusline+=%#warningmsg#                " Highlights the syntastic errors in red
 " set statusline+=%{SyntasticStatuslineFlag()} " Adds the line number and error count
-set statusline+=%*                           " Fill the width of the vim window
+set statusline+=%*                             " Fill the width of the vim window
 "
 "-----------------------------------------------------------------------------------
 " Change the background color of the status line based on the mode. 
@@ -164,7 +163,7 @@ au InsertLeave * hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
 set guioptions-=T
 
 "-----------------------------------------------------------------------------------
-" Show relative line numbers in cmd mode
+" Show relative line numbers in cmd mode (Working to phase this one out)
 "-----------------------------------------------------------------------------------
 "autocmd InsertEnter * :set number
 "autocmd InsertLeave * :set relativenumber
@@ -211,8 +210,6 @@ nnoremap <leader>t :buffers<CR>:buffer<Space>
 nnoremap <leader>b :CtrlPBuffer<CR>
 " --- open Ctrlp as a fuzzy finder
 nnoremap <leader>ff :CtrlP<CR>
-" --- Auto completion to get python parameter information
-inoremap <leader><space> <C-x><C-o>
 " --- Better window navigation E.g. now use Ctrl+j instead of Ctrl+W+j
 nnoremap <C-j> <C-w>j  
 nnoremap <C-k> <C-w>k
@@ -232,6 +229,21 @@ nnoremap <leader>ts :SyntasticToggleMode<CR>
 map <leader>fs :CtrlPTag<CR>
 " --- Re-index the ctags file
 nnoremap <leader>ri :call RenewTagsFile()<cr>
+" Copy current buffer path relative to root of VIM session to system clipboard
+nnoremap <leader>yp :let @" = expand("%:p")"<cr>:echo "Copied file path to clipboard"<cr>
+" Copy current filename to system clipboard
+nnoremap <Leader>yf :let @"=expand("%:t")<cr>:echo "Copied file name to clipboard"<cr>
+" Copy current buffer path without filename to system clipboard
+nnoremap <Leader>yd :let @"=expand("%:h")<cr>:echo "Copied file directory to clipboard"<cr>
+" --- Strip trailing whitespace
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+" --- Karma test runner shortcut
+map <leader>q :!karma start<CR>
+" --- python unit testing shortcuts to show the session + test by file/class/method
+map <leader>ts :QTPY session<cr>
+map <leader>tf :w<cr> :QTPY file verbose<cr>
+map <leader>tc :w<cr> :QTPY class verbose<cr>
+map <leader>tm :w<cr> :QTPY method verbose<cr>
 "
 "===================================================================================
 " VARIOUS PLUGIN CONFIGURATIONS
@@ -282,8 +294,7 @@ let NERDTreeIgnore = ['\.pyc$']
 "-----------------------------------------------------------------------------------
 " Jedi configurations
 "-----------------------------------------------------------------------------------
-let g:jedi#goto_command = "<leader>j"
-let g:jedi#get_definition_command = "<leader>gd"
+let g:jedi#get_definition_command = "<leader>j"
 let g:jedi#use_tabs_not_buffers = 0     " Use buffers not tabs
 
 "===================================================================================
@@ -349,8 +360,6 @@ let mapleader=","
 nnoremap <leader>ff :CtrlP<CR>
 " --- shortcut to save the current document
 map .. :w<cr>
-" --- shortcut to goto the item under the cursor
-let g:jedi#get_definition_command = "<leader>j"
 " -- spell check
 noremap <leader>sp :set spell spelllang=en_us<cr>
 " --- like grep on steroids
@@ -381,20 +390,17 @@ let g:EasyMotion_leader_key = '<leader>l'
 map <leader>rf :call RenameFile()<cr>
 " --- Shortcut to CopyFile function defined above
 map <leader>cf :call CopyFile()<cr>
-
 " --- re-index the ctags file
 nnoremap <leader>ri :call RenewTagsFile()<cr>
-
 " --- Strip trailing whitespace
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
-
 " --- jj and jk For Qicker Escaping between normal and editing mode
 inoremap jj <ESC>
 inoremap jk <ESC>
-
 " Copy current buffer path relative to root of VIM session to system clipboard
-nnoremap <leader>yp :let @+=expand("%")<cr>:echo "Copied file path to clipboard"<cr>
+nnoremap <leader>yp :let @" = expand("%:p")"<cr>:echo "Copied file path to clipboard"<cr>
 " Copy current filename to system clipboard
-nnoremap <Leader>yf :let @*=expand("%:t")<cr>:echo "Copied file name to clipboard"<cr>
+nnoremap <Leader>yf :let @"=expand("%:t")<cr>:echo "Copied file name to clipboard"<cr>
 " Copy current buffer path without filename to system clipboard
-nnoremap <Leader>yd :let @*=expand("%:h")<cr>:echo "Copied file directory to clipboard"<cr>
+nnoremap <Leader>yd :let @"=expand("%:h")<cr>:echo "Copied file directory to clipboard"<cr>
+
