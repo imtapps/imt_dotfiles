@@ -57,6 +57,8 @@ set nocompatible
  Bundle 'https://github.com/ameade/qtpy-vim'
  Bundle 'https://github.com/toranb/vim-django-support.git'
  Bundle 'https://github.com/goldfeld/vim-seek.git'
+ Bundle 'https://github.com/alfredodeza/pytest.vim'
+ Bundle 'https://github.com/jmcantrell/vim-virtualenv'
 "
 "===================================================================================
 " GENERAL SETTINGS
@@ -260,6 +262,7 @@ let g:syntastic_javascript_checkers = ['jshint']  " sets jshint as our javascrip
 " UltiSnips configurations
 "-----------------------------------------------------------------------------------
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mySnippets"]
+let g:UltiSnipsExpandTrigger='`'
 " 
 "-----------------------------------------------------------------------------------
 " Neocomplcache configurations
@@ -403,4 +406,3 @@ nnoremap <leader>yp :let @" = expand("%:p")"<cr>:echo "Copied file path to clipb
 nnoremap <Leader>yf :let @"=expand("%:t")<cr>:echo "Copied file name to clipboard"<cr>
 " Copy current buffer path without filename to system clipboard
 nnoremap <Leader>yd :let @"=expand("%:h")<cr>:echo "Copied file directory to clipboard"<cr>
-
