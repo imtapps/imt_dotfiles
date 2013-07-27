@@ -59,6 +59,7 @@ set nocompatible
  Bundle 'https://github.com/goldfeld/vim-seek.git'
  Bundle 'https://github.com/alfredodeza/pytest.vim'
  Bundle 'https://github.com/jmcantrell/vim-virtualenv'
+ Bundle 'https://github.com/mhinz/vim-startify'
 "
 "===================================================================================
 " GENERAL SETTINGS
@@ -299,6 +300,38 @@ let NERDTreeIgnore = ['\.pyc$']
 "-----------------------------------------------------------------------------------
 let g:jedi#get_definition_command = "<leader>j"
 let g:jedi#use_tabs_not_buffers = 0     " Use buffers not tabs
+
+"-----------------------------------------------------------------------------------
+" Startify constantly
+"-----------------------------------------------------------------------------------
+" Highlight the acsii banner with red font
+hi StartifyHeader ctermfg=124   
+" Set the contents of the banner
+let g:startify_custom_header = [
+            \ '               $$$$$$$$       $$$$$$$$$$$$$      $$$$$$$$$$$$$        $$$$$$$$$$     ',
+            \ '              $$$$$$$$$       $$$$$$$$$$$$$$$$   $$$$$$$$$$$$$$$$   $$$$$$$$$$$$$$   ',
+            \ '             $$$$$$$$$$       $$$$$$$$$$$$$$$$$ $$$$$$$$$$$$$$$$$$ $$$$$$   $$$$$$$  ',
+            \ '                                          $$$$$              $$$$$                   ',
+            \ '                                          $$$$$              $$$$$                   ',
+            \ '                                         $$$$$$             $$$$$$                   ',
+            \ '          $$$$$$$$$$$$$$    $$$$$$$$$$$$$$$$$$ $$$$$$$$$$$$$$$$$$    $$$$$$$$$$$$$   ',
+            \ '         $$$$$$$$$$$$$$$    $$$$$$$$$$$$$$$$$  $$$$$$$$$$$$$$$$$        $$$$$$$$$$$  ',
+            \ '        $$$$$$     $$$$$$   $$$$$$             $$$$$$            $$$$$      $$$$$$$  ',
+            \ '       $$$$$$      $$$$$$   $$$$$$            $$$$$$$            $$$$$$     $$$$$$$  ',
+            \ '      $$$$$$       $$$$$$  $$$$$$$            $$$$$$$             $$$$$$$$$$$$$$$$   ',
+            \ '     $$$$$$        $$$$$$$ $$$$$$$            $$$$$$$               $$$$$$$$$$$$     ',
+            \ '    $$$$$$$        $$$$$$$$$$$$$$$            $$$$$$$                  $$$$$$        ',
+            \ '                                                                                     ',
+            \ '    ===============================================================================  ',
+            \ '    ===============================================================================  ',
+            \ '',
+            \]
+" List recently used files using viminfo.
+let g:startify_show_files = 1
+" The number of files to list.
+let g:startify_show_files_number = 10
+" A list of files to bookmark. Always shown
+let g:startify_bookmarks = [ '~/.vimrc' ]
 
 "===================================================================================
 " BUFFERS, WINDOWS
