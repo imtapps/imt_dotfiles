@@ -96,8 +96,8 @@ set autoindent                         " copy indent from current line
 set autoread                           " read open files again when changed outside Vim
 set autowrite                          " write a modified buffer on each :next , ...
 set backspace=indent,eol,start         " backspacing over everything in insert mode
-" set browsedir=current                  " which directory to use for the file browser
-" set complete+=k                        " scan the files given with the 'dictionary' option
+set browsedir=current                  " which directory to use for the file browser
+set complete+=k                        " scan the files given with the 'dictionary' option
 set history=50                         " keep 50 lines of command line history
 set hlsearch                           " highlight the last used search pattern
 set incsearch                          " do incremental searching
@@ -302,7 +302,7 @@ let g:jedi#get_definition_command = "<leader>j"
 let g:jedi#use_tabs_not_buffers = 0     " Use buffers not tabs
 
 "-----------------------------------------------------------------------------------
-" Startify constantly
+" Startify configurations
 "-----------------------------------------------------------------------------------
 " Highlight the acsii banner with red font
 hi StartifyHeader ctermfg=124   
