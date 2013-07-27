@@ -1,9 +1,7 @@
 "===================================================================================
 "         FILE:  css.vim
 "  DESCRIPTION:  Settings that load only for files with the .css extension
-"       AUTHOR:  Jarrod Taylor
-"      CREATED:  06.19.2011
-"       UPDTED:  07.21.2012
+"       AUTHOR:  IMT Apps
 "===================================================================================
 "
 
