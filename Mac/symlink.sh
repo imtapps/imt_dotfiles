@@ -14,5 +14,5 @@ ln -s ~/imt_dotfiles/Mac/zsh-syntax-highlighting.zsh ~/zsh-syntax-highlighting.z
 ln -s ~/imt_dotfiles/Mac/zshrc ~/.zshrc
 
 # Clone vundle so we can update vim plugins
-git clone https://github.com/gmarik/vundle.git ~/imt_dotfiles/vim/bundle/vundle
+git clone https://github.com/gmarik/vundle.git ~/imt_dotfiles/Mac/vim/bundle/vundle
 

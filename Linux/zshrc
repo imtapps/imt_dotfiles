@@ -152,8 +152,7 @@ fi
 #===============================================================================
 #  Aliases
 #===============================================================================
-# alias ls='ls -F --color' # This is for linux breaks macs
-alias ls='ls -FHG'
+alias ls='ls -F --color'
 alias ll='ls -lh'
 alias la='ls -la'
 alias lls='ll -Sr'
