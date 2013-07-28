@@ -269,8 +269,8 @@ virtualenv_cd() {
 alias cd=virtualenv_cd
 
 #--------------------------------------------------------------------
-# Auto actiavted node
-# TODO activate node modules karma bin when we do this
+# If we cd into a directory that contains a directory named node_modules
+# we automatically recursively add it to the $PATH
 # -------------------------------------------------------------------
 workon_node_env() {
   if [[ -d "node_modules" ]]; then
