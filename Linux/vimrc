@@ -57,8 +57,6 @@ set nocompatible
  Bundle 'https://github.com/ameade/qtpy-vim'
  Bundle 'https://github.com/toranb/vim-django-support.git'
  Bundle 'https://github.com/goldfeld/vim-seek.git'
- Bundle 'https://github.com/alfredodeza/pytest.vim'
- Bundle 'https://github.com/jmcantrell/vim-virtualenv'
  Bundle 'https://github.com/mhinz/vim-startify'
 "
 "===================================================================================
@@ -96,8 +94,8 @@ set autoindent                         " copy indent from current line
 set autoread                           " read open files again when changed outside Vim
 set autowrite                          " write a modified buffer on each :next , ...
 set backspace=indent,eol,start         " backspacing over everything in insert mode
-" set browsedir=current                  " which directory to use for the file browser
-" set complete+=k                        " scan the files given with the 'dictionary' option
+set browsedir=current                  " which directory to use for the file browser
+set complete+=k                        " scan the files given with the 'dictionary' option
 set history=50                         " keep 50 lines of command line history
 set hlsearch                           " highlight the last used search pattern
 set incsearch                          " do incremental searching
