@@ -87,9 +87,9 @@ export GREP_OPTIONS='--color=auto'
 #-------------------------------------------------------------------------------
 # Editor and display configurations
 #-------------------------------------------------------------------------------
-export EDITOR='vim'
-export VISUAL='vim'
-export GIT_EDITOR=$EDITOR
+# export EDITOR='vim'
+# export VISUAL='vim'
+# export GIT_EDITOR=$EDITOR
 export LESS='-imJMWR'
 export PAGER="less $LESS"
 export MANPAGER=$PAGER

@@ -58,6 +58,7 @@ set nocompatible
  Bundle 'https://github.com/toranb/vim-django-support.git'
  Bundle 'https://github.com/goldfeld/vim-seek.git'
  Bundle 'https://github.com/mhinz/vim-startify'
+ Bundle 'https://github.com/tpope/vim-surround'
 "
 "===================================================================================
 " GENERAL SETTINGS
@@ -162,6 +163,11 @@ au InsertLeave * hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
 " Turn off the toolbar that is under the menu in gvim
 "-----------------------------------------------------------------------------------
 set guioptions-=T
+
+"-----------------------------------------------------------------------------------
+" Set the minimum number of lines above and below the cursor
+"-----------------------------------------------------------------------------------
+set scrolloff=3
 
 "-----------------------------------------------------------------------------------
 " Show relative line numbers in cmd mode (Working to phase this one out)
