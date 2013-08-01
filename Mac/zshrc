@@ -85,6 +85,11 @@ export LC_COLLATE=C
 export GREP_OPTIONS='--color=auto'
 
 #-------------------------------------------------------------------------------
+# Alows Mac to use the correct ctags, old version installed by default
+#-------------------------------------------------------------------------------
+PATH="/usr/local/bin:$PATH"
+
+#-------------------------------------------------------------------------------
 # Editor and display configurations
 #-------------------------------------------------------------------------------
 # export EDITOR='vim'
