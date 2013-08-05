@@ -285,6 +285,7 @@ let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
 " Ctrlp configurations
 "-----------------------------------------------------------------------------------
 let g:ctrlp_custom_ignore = 'node_modules$\|xmlrunner$\|.DS_Store|.git|.bak|.swp|.pyc'
+let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_height = 18
 "
 "-----------------------------------------------------------------------------------

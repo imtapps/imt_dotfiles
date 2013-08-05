@@ -341,4 +341,10 @@ add_current_directory_to_path() {
 # Run precmd functions so we get our pimped out prompt
 #------------------------------------------------------------------------------
 precmd_functions=( precmd_prompt )
+
+#------------------------------------------------------------------------------
+# Add rmv scripts
+#------------------------------------------------------------------------------
+source ~/.rvm/scripts/rvm
+
 # EOF

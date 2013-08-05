@@ -12,6 +12,7 @@ ln -s ~/imt_dotfiles/Mac/highlighters ~/highlighters
 ln -s ~/imt_dotfiles/Mac/zsh_prompt ~/.zsh_prompt
 ln -s ~/imt_dotfiles/Mac/zsh-syntax-highlighting.zsh ~/zsh-syntax-highlighting.zsh
 ln -s ~/imt_dotfiles/Mac/zshrc ~/.zshrc
+ln -s ~/imt_dotfiles/Mac/ackrc ~/.ackrc
 
 # Clone vundle so we can update vim plugins
 git clone https://github.com/gmarik/vundle.git ~/imt_dotfiles/Mac/vim/bundle/vundle
