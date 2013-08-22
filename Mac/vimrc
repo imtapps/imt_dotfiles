@@ -1,4 +1,4 @@
-" vim: set foldmarker={,} foldlevel=0 foldmethod=marker:
+" vim: set foldmarker={,} foldlevel=1 foldmethod=marker:
 "===================================================================================
 "  DESCRIPTION:  Enterprise Ready Development Environment
 " .__         __                                
