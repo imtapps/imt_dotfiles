@@ -1,17 +1,26 @@
+" vim: set foldmarker={,} foldlevel=0 foldmethod=marker:
 "===================================================================================
-"         FILE:  .vimrc
-"  DESCRIPTION:  An ever changing work in progress
-"       AUTHOR:  IMTapps
+"  DESCRIPTION:  Enterprise Ready Development Environment
+" .__         __                                
+" |__| ______/  |_  _____  ______ ______  ______
+" |  |/     \   __\ \__  \ \____ \\____ \/  ___/
+" |  |  Y Y  \  |    / __ \|  |_> >  |_> >___ \ 
+" |__|__|_|  /__|   (____  /   __/|   __/____  >
+"          \/            \/|__|   |__|       \/  
+"  
 "===================================================================================
-"
+" 
+ 
+" Set nocompatible {
 "-----------------------------------------------------------------------------------
 " Use Vim settings, rather then Vi settings. This must be first, because it changes
 " other options as a side effect.
 "-----------------------------------------------------------------------------------
 set nocompatible
-"
+" }
+
+" Vundle Package Management {
 "===================================================================================
-" Vundle package management
 "
 " Help
 " :BundleList          - list configured bundles
@@ -52,7 +61,6 @@ set nocompatible
  Bundle 'https://github.com/kien/ctrlp.vim'
  Bundle 'https://github.com/tpope/vim-commentary'
  Bundle 'https://github.com/davidhalter/jedi-vim'
- Bundle 'https://github.com/ameade/qtpy-vim'
  Bundle 'https://github.com/toranb/vim-django-support.git'
  Bundle 'https://github.com/goldfeld/vim-seek.git'
  Bundle 'https://github.com/mhinz/vim-startify'
@@ -60,10 +68,9 @@ set nocompatible
  Bundle 'https://github.com/jmcantrell/vim-virtualenv.git'
  Bundle 'https://github.com/nono/vim-handlebars'
  Bundle 'https://github.com/JarrodCTaylor/vim-python-test-runner'
-"
-"===================================================================================
-" GENERAL SETTINGS
-"===================================================================================
+" }
+
+" General Settings {
 "
 "-----------------------------------------------------------------------------------
 " Enable file type detection. Use the default filetype settings.
@@ -103,7 +110,6 @@ set incsearch                          " Do incremental searching
 set listchars=""                       " Empty the listchars
 set listchars=tab:>.                   " A tab will be displayed as >...
 set listchars+=trail:.                 " Trailing white spaces will be displayed as .
-set mouse=a                            " Enable the use of the mouse
 set nobackup                           " Don't constantly write backup files
 set noswapfile                         " Ain't nobody got time for swap files
 set noerrorbells                       " Don't beep
@@ -120,9 +126,48 @@ set visualbell                         " Visual bell instead of beeping
 set wildignore=*.swp,*.bak,*.pyc,*.class,node_modules/**  " wildmenu: ignore these extensions
 set wildmenu                           " Command-line completion in an enhanced mode
 set shell=bash                         " Required to let zsh know how to run things on command line 
-"
+
 "-----------------------------------------------------------------------------------
-" My pimped out status line
+" Turn off the toolbar that is under the menu in gvim
+"-----------------------------------------------------------------------------------
+set guioptions-=T
+
+"-----------------------------------------------------------------------------------
+" Set the minimum number of lines above and below the cursor
+"-----------------------------------------------------------------------------------
+set scrolloff=3
+
+"-----------------------------------------------------------------------------------
+" Show relative line numbers in cmd mode (Working to phase this one out)
+"-----------------------------------------------------------------------------------
+"autocmd InsertEnter * :set number
+"autocmd InsertLeave * :set relativenumber
+
+"-----------------------------------------------------------------------------------
+" Treat JSON files like JavaScript
+"-----------------------------------------------------------------------------------
+au BufNewFile,BufRead *.json set ft=javascript
+
+"-----------------------------------------------------------------------------------
+" Make pasting done without any indentation break
+"-----------------------------------------------------------------------------------
+set pastetoggle=<F3>
+
+"-----------------------------------------------------------------------------------
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event handler
+" (happens when dropping a file on gvim).
+"-----------------------------------------------------------------------------------
+if has("autocmd")
+  autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal! g`\"" |
+        \ endif
+endif " has("autocmd")
+
+" }
+ 
+" Status line {
 "-----------------------------------------------------------------------------------
 set laststatus=2                " Make the second to last line of vim our status line
 set statusline=%F                              " File path
@@ -156,35 +201,10 @@ endfunction
 
 au InsertEnter * call InsertStatuslineColor(v:insertmode)
 au InsertLeave * hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
-"
-"-----------------------------------------------------------------------------------
-" Turn off the toolbar that is under the menu in gvim
-"-----------------------------------------------------------------------------------
-set guioptions-=T
+" }
 
-"-----------------------------------------------------------------------------------
-" Set the minimum number of lines above and below the cursor
-"-----------------------------------------------------------------------------------
-set scrolloff=3
-
-"-----------------------------------------------------------------------------------
-" Show relative line numbers in cmd mode (Working to phase this one out)
-"-----------------------------------------------------------------------------------
-"autocmd InsertEnter * :set number
-"autocmd InsertLeave * :set relativenumber
-
-"-----------------------------------------------------------------------------------
-" Treat JSON files like JavaScript
-"-----------------------------------------------------------------------------------
-au BufNewFile,BufRead *.json set ft=javascript
-
-"-----------------------------------------------------------------------------------
-" Make pasting done without any indentation break
-"-----------------------------------------------------------------------------------
-set pastetoggle=<F3>
-
+" Jarrod's Remapped Keys {
 "===================================================================================
-"  REMAPPED KEYS 
 "  (nore) prefix -- non-recursive
 "  (un)   prefix -- Remove a mode-specific map 
 "  Commands                        Mode
@@ -206,29 +226,29 @@ imap jk <Esc>
 " --- ss will toggle spell checking
 map ss :setlocal spell!<CR>
 " --- toggle NERDTree 
-nnoremap <leader>nt :NERDTreeToggle<CR>
+nnoremap <Leader>nt :NERDTreeToggle<CR>
 " --- toggle Tagbar 
-nnoremap <leader>tb :TagbarToggle<CR>
+nnoremap <Leader>tb :TagbarToggle<CR>
 " --- open CtrlP buffer explorer
-nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <Leader>b :CtrlPBuffer<CR>
 " --- open Ctrlp as a fuzzy finder
-nnoremap <leader>ff :CtrlP<CR>
+nnoremap <Leader>ff :CtrlP<CR>
 " --- Split the window vertically
-nnoremap <leader>\ :vsplit<CR>
+nnoremap <Leader>\ :vsplit<CR>
 " --- Split the window horizontally
-nnoremap <leader>- :split<CR>
+nnoremap <Leader>- :split<CR>
 " --- Ack short cut
-nnoremap <leader>a :Ack!<space>
+nnoremap <Leader>a :Ack!<space>
 " --- Toggle Syntastic
-nnoremap <leader>ts :SyntasticToggleMode<CR>
+nnoremap <Leader>ts :SyntasticToggleMode<CR>
 " --- Clear the search buffer and highlighted text with enter press
 :nnoremap <CR> :nohlsearch<CR>
 " --- Search the ctags index file for anything by class or method name
-map <leader>st :CtrlPTag<CR>
+map <Leader>st :CtrlPTag<CR>
 " --- Refresh the ctags file
-nnoremap <leader>rt :call RenewTagsFile()<CR>
+nnoremap <Leader>rt :call RenewTagsFile()<CR>
 " --- Strip trailing whitespace
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+nnoremap <Leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 " --- Better window navigation E.g. now use Ctrl+j instead of Ctrl+W+j
 nnoremap <C-j> <C-w>j  
 nnoremap <C-k> <C-w>k
@@ -236,23 +256,18 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 " --- Shortcuts for test running commands 
 nnoremap<Leader>da :DjangoTestApp<CR>
+nnoremap<Leader>df :DjangoTestFile<CR>
 nnoremap<Leader>dc :DjangoTestClass<CR>
 nnoremap<Leader>dm :DjangoTestMethod<CR>
 nnoremap<Leader>nf :NosetestFile<CR>
 nnoremap<Leader>nc :NosetestClass<CR>
-nnoremap<Leader>nm :NosetestMethod<CR> 
-" Copy current buffer path relative to root of VIM session to system clipboard
-nnoremap <leader>yp :let @" = expand("%:p")"<CR>:echo "Copied file path to clipboard"<CR>
-" Copy current filename to system clipboard
-nnoremap <Leader>yf :let @"=expand("%:t")<CR>:echo "Copied file name to clipboard"<CR>
-" Copy current buffer path without filename to system clipboard
-nnoremap <Leader>yd :let @"=expand("%:h")<CR>:echo "Copied file directory to clipboard"<CR>
+nnoremap<Leader>nm :NosetestMethod<CR>
 " --- Karma test runner shortcut
-map <leader>q :!karma start<CR>
-"
-"===================================================================================
-" VARIOUS PLUGIN CONFIGURATIONS
-"===================================================================================
+map <Leader>q :!karma start<CR>"
+" }
+
+" Plugin Configurations {
+
 "-----------------------------------------------------------------------------------
 " Syntastic configurations use :help syntastic.txt
 "-----------------------------------------------------------------------------------
@@ -299,7 +314,7 @@ let NERDTreeIgnore = ['\.pyc$']
 "-----------------------------------------------------------------------------------
 " Jedi configurations
 "-----------------------------------------------------------------------------------
-let g:jedi#get_definition_command = "<leader>j"
+let g:jedi#get_definition_command = "<Leader>j"
 let g:jedi#use_tabs_not_buffers = 0     " Use buffers not tabs
 
 "-----------------------------------------------------------------------------------
@@ -334,26 +349,10 @@ let g:startify_show_files_number = 10
 " A list of files to bookmark. Always shown
 let g:startify_bookmarks = [ '~/.vimrc' ]
 
-"===================================================================================
-" BUFFERS, WINDOWS
-"===================================================================================
-"
-"-----------------------------------------------------------------------------------
-" When editing a file, always jump to the last known cursor position.
-" Don't do it when the position is invalid or when inside an event handler
-" (happens when dropping a file on gvim).
-"-----------------------------------------------------------------------------------
-if has("autocmd")
-  autocmd BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \   exe "normal! g`\"" |
-        \ endif
-endif " has("autocmd")
-"
-"===================================================================================
-" Misc Functions
-"===================================================================================
-"
+" }
+
+" Misc Functions {
+
 function! RenewTagsFile()
     exe 'silent !rm -rf .ctags'
     exe 'silent !coffeetags --include-vars -Rf .ctags'
@@ -387,55 +386,57 @@ function! RenameFile()
     endif
 endfunction
 
-"===================================================================================
-" KEY BINDINGS FOR THE OTHERS (Everyone who is not Jarrod) AT IMT
+" }
+
+" Key Bindings For The Others (Everyone who is not Jarrod) AT IMT {
 "===================================================================================
 "
 let mapleader=","
 " --- open Ctrlp as a fuzzy finder
-nnoremap <leader>ff :CtrlP<CR>
+nnoremap <Leader>ff :CtrlP<CR>
 " --- shortcut to save the current document
-map .. :w<cr>
+map .. :w<CR>
 " -- spell check
-noremap <leader>sp :set spell spelllang=en_us<cr>
+noremap <Leader>sp :set spell spelllang=en_us<CR>
 " --- like grep on steroids
-map <leader>a :Ack!<space>
+map <Leader>a :Ack!<space>
 " --- basic file system navigation view
-map <leader>d :NERDTreeToggle<cr>
-nmap <leader>nt :NERDTreeFind<CR>
-" --- python unit testing shortcuts to show the session + test by file/class/method
-map <leader>ts :QTPY session<cr>
-map <leader>tf :w<cr> :QTPY file verbose<cr>
-map <leader>tc :w<cr> :QTPY class verbose<cr>
-map <leader>tm :w<cr> :QTPY method verbose<cr>
+map <Leader>d :NERDTreeToggle<CR>
+nmap <Leader>nt :NERDTreeFind<CR>
+" --- python unit testing shortcuts
+map <Leader>ta :DjangoTestApp<CR>
+map <Leader>tf :DjangoTestFile<CR>
+map <Leader>tc :DjangoTestClass<CR>
+map <Leader>tm :DjangoTestMethod<CR>
 " --- search the ctags index file for anything by class or method name
-map <leader>fs :CtrlPTag<CR>
+map <Leader>fs :CtrlPTag<CR>
 " --- search all files in the current files directory
-map <leader>fd :CtrlPCurFile<CR>
+map <Leader>fd :CtrlPCurFile<CR>
 " --- search all the files you have open in your vim buffer
-map <leader>fb :CtrlPBuffer<CR>
+map <Leader>fb :CtrlPBuffer<CR>
 " --- go to the last file you had open
-nmap <leader><leader> <c-^>
+nmap <Leader><Leader> <c-^>
 " --- Karma test runner shortcut
-map <leader>q :!karma start<CR>
+map <Leader>q :!karma start<CR>
 " --- ,ed Shortcut to edit .vimrc file on the fly on a vertical window
-nnoremap <leader>ed <C-w><C-v><C-l>:e $MYVIMRC<cr>
+nnoremap <Leader>ed <C-w><C-v><C-l>:e $MYVIMRC<CR>
 " --- Easy motion
-let g:EasyMotion_leader_key = '<leader>l'
+let g:EasyMotion_leader_key = '<Leader>l'
 " --- Shortcut to RenameFile function defined above
-map <leader>rf :call RenameFile()<cr>
+map <Leader>rf :call RenameFile()<CR>
 " --- Shortcut to CopyFile function defined above
-map <leader>cf :call CopyFile()<cr>
+map <Leader>cf :call CopyFile()<CR>
 " --- re-index the ctags file
-nnoremap <leader>ri :call RenewTagsFile()<cr>
+nnoremap <Leader>ri :call RenewTagsFile()<CR>
 " --- Strip trailing whitespace
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+nnoremap <Leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 " --- jj and jk For Qicker Escaping between normal and editing mode
 inoremap jj <ESC>
 inoremap jk <ESC>
 " Copy current buffer path relative to root of VIM session to system clipboard
-nnoremap <leader>yp :let @" = expand("%:p")"<cr>:echo "Copied file path to clipboard"<cr>
+nnoremap <Leader>yp :let @" = expand("%:p")"<CR>:echo "Copied file path to clipboard"<CR>
 " Copy current filename to system clipboard
-nnoremap <Leader>yf :let @"=expand("%:t")<cr>:echo "Copied file name to clipboard"<cr>
+nnoremap <Leader>yf :let @"=expand("%:t")<CR>:echo "Copied file name to clipboard"<CR>
 " Copy current buffer path without filename to system clipboard
-nnoremap <Leader>yd :let @"=expand("%:h")<cr>:echo "Copied file directory to clipboard"<cr>
+nnoremap <Leader>yd :let @"=expand("%:h")<CR>:echo "Copied file directory to clipboard"<CR>
+" }
