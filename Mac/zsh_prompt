@@ -31,7 +31,7 @@ local -a prompt_left_lines # Array parameters
 
 
 zstyle ":pr_jrock:" mode full
-zstyle ':pr_jrock:*' hooks pwd usr vcs venv jobs prompt
+zstyle ':pr_jrock:*' hooks pwd usr vcs venv rvm jobs prompt
 zstyle ':pr_jrock:*' pwd "%~"
 
 # Set vcs_info options
@@ -86,20 +86,34 @@ function pr_run_hooks() {
 # ├──(git) d2a3f82fe9c5 Unstaged master [origin/master ]
 # └───>
 function +pr-mode-full() {
-    local i info_line_width return_status_width filler shim
+    local i info_line_width return_status_width filler v_shim rvm_shim
 
     infoline=( ${pr_com[pwd]} ${pr_com[usr]} )
+
+    # If we are in a ruby virtual machine we want to display that on the info line
+    [[ -n ${pr_com[rvm]} ]] && infoline[1]=(
+        ${infoline[1]}
+        "${red} r${gray}(${pr_com[rvm]}${gray})${reset}"
+    )
+
+    # The prompt will not take up the full width of the terminal when in a rvm
+    # If we are in a rvm we add a one character shim to the width of the filler
+    rvm_shim=0
+    if [[ -n ${pr_com[rvm]} ]]; then
+        rvm_shim+=1 # Shim the filler to take up the entire width of the prompt
+    fi
+     
     # If we are in a virtualenv we want to display that on the info line
     [[ -n ${pr_com[venv]} ]] && infoline[1]=(
         ${infoline[1]}
         "${blue} v${gray}(${pr_com[venv]}${gray})${reset}"
     )
 
-    # The prompt was not taking up the full width of the terminal when in a virtualenv
-    # If we are in a virtualenv then we add a one character shim to the width of the filler
-    shim=0
+    # The prompt will not take up the full width of the terminal when in a virtualenv
+    # If we are in a virtualenv we add a one character shim to the width of the filler
+    v_shim=0
     if [[ -n ${pr_com[venv]} ]]; then
-        shim+=1 # Shim the filler to take up the entire width of the prompt
+        v_shim+=1 # Shim the filler to take up the entire width of the prompt
     fi
 
     # Full-width filler; search/replace color wraps to find real text width
@@ -108,7 +122,7 @@ function +pr-mode-full() {
     return_status_width=3 # We will take up three spaces to display the return code (✔)
 
     # Set the text string that will be used to fill the width of the terminal filler
-    filler="${gray}${(l:$(( $COLUMNS - $info_line_width - $return_status_width + $shim ))::─:)}${reset}"
+    filler="${gray}${(l:$(( $COLUMNS - $info_line_width - $return_status_width + $v_shim + $rvm_shim))::─:)}${reset}"
     infoline[-1]=( ${filler} ${infoline[-1]} )
 
     # --------------------------
@@ -166,6 +180,21 @@ function +pr-venv() {
     )
 
     pr_com[venv]=${(j::)v_venv}
+}
+
+# Show rvm information
+function +pr-rvm() {
+    local -a v_rvm
+
+    if [[ $(rvm current | awk '{split($0,a,"@");print a[2]}') != "" ]]; then
+        v_rvm=(
+            ${red}
+            $(rvm current | awk '{split($0,a,"@");print a[2]}')
+            ${reset}
+        )
+    fi
+
+    pr_com[rvm]=${(j::)v_rvm}
 }
 
 # Show number of background jobs, or hide if none
