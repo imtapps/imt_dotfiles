@@ -262,8 +262,8 @@ nnoremap<Leader>dm :DjangoTestMethod<CR>
 nnoremap<Leader>nf :NosetestFile<CR>
 nnoremap<Leader>nc :NosetestClass<CR>
 nnoremap<Leader>nm :NosetestMethod<CR>
-" --- Karma test runner shortcut
-map <Leader>q :!karma start<CR>"
+" --- grunt-karma test runner shortcut
+map <Leader>q :!grunt test<CR>"
 " }
 
 " Plugin Configurations {
@@ -416,8 +416,8 @@ map <Leader>fd :CtrlPCurFile<CR>
 map <Leader>fb :CtrlPBuffer<CR>
 " --- go to the last file you had open
 nmap <Leader><Leader> <c-^>
-" --- Karma test runner shortcut
-map <Leader>q :!karma start<CR>
+" --- grunt-karma test runner shortcut
+map <Leader>q :!grunt test<CR>
 " --- ,ed Shortcut to edit .vimrc file on the fly on a vertical window
 nnoremap <Leader>ed <C-w><C-v><C-l>:e $MYVIMRC<CR>
 " --- Easy motion
