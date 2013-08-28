@@ -109,7 +109,6 @@ export WINEDEBUG=-all
 #-------------------------------------------------------------------------------
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/VirtualDevEnvs
-source /usr/local/bin/virtualenvwrapper.sh
 
 #-------------------------------------------------------------------------------
 #
