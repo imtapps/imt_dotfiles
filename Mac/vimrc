@@ -61,7 +61,6 @@ set nocompatible
  Bundle 'https://github.com/kien/ctrlp.vim'
  Bundle 'https://github.com/tpope/vim-commentary'
  Bundle 'https://github.com/davidhalter/jedi-vim'
- Bundle 'https://github.com/toranb/vim-django-support.git'
  Bundle 'https://github.com/goldfeld/vim-seek.git'
  Bundle 'https://github.com/mhinz/vim-startify'
  Bundle 'https://github.com/tpope/vim-surround'
