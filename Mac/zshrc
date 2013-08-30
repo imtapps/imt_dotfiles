@@ -1,13 +1,25 @@
 #!/bin/zsh
+# vim: set foldmarker={{,}} foldlevel=1 foldmethod=marker:
+#===================================================================================
+#                 .__                   
+#  ________  _____|  |_________   ____  
+#  \___   / /  ___/  |  \_  __ \_/ ___\ 
+#   /    /  \___ \|   Y  \  | \/\  \___ 
+#  /_____ \/____  >___|  /__|    \___  >
+#        \/     \/     \/            \/ 
+#===================================================================================
+# 
 
+# General Settings {{
 #-------------------------------------------------------------------------------
 # Autoload colors and tab completion
 #-------------------------------------------------------------------------------
 autoload -U colors && colors
 autoload -U compinit
 compinit -C
+
 #-------------------------------------------------------------------------------
-## case-insensitive (all),partial-word and then substring completion
+# case-insensitive (all),partial-word and then substring completion
 #-------------------------------------------------------------------------------
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
@@ -88,6 +100,9 @@ zstyle ':completion:*' list-colors "$LS_COLORS"
 zstyle -e ':completion:*:(ssh|scp|sshfs|ping|telnet|nc|rsync):*' hosts '
     reply=( ${=${${(M)${(f)"$(<~/.ssh/config)"}:#Host*}#Host }:#*\**} )'
 
+# }}
+
+# Key Bindings {{
 #-------------------------------------------------------------------------------
 # Set emacs like key bindings
 #-------------------------------------------------------------------------------
@@ -97,9 +112,9 @@ bindkey '^R' history-incremental-search-backward
 bindkey '^R' history-incremental-pattern-search-backward
 bindkey '^?' backward-delete-char
 bindkey '^H' backward-delete-char
+# }}
 
-#-------------------------------------------------------------------------------
-# Set up prompt
+# Set up the prompt {{
 #-------------------------------------------------------------------------------
 if [[ ! -n "$ZSHRUN" ]]; then
     source $HOME/.zsh_prompt
@@ -112,10 +127,10 @@ if [[ ! -n "$ZSHRUN" ]]; then
     fi
 fi
 
-#===============================================================================
-#  Aliases
-#===============================================================================
-# alias ls='ls -F --color' # This is for linux breaks macs
+# }}
+
+#  Aliases {{
+#-------------------------------------------------------------------------------
 alias ls='ls -FHG'
 alias ll='ls -lh'
 alias la='ls -la'
@@ -135,9 +150,15 @@ alias ad='add_current_directory_to_path'
 if [[ -d /Applications/MacVim.app/Contents/MacOS/ ]]; then
     alias vim=/Applications/MacVim.app/Contents/MacOS/vim
 fi
+alias startdb='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+alias stopdb='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
+alias gs='git status'
+alias gd='git diff'
+alias ts='tig status'
 
-#===============================================================================
-# FUNCTIONS
+# }}
+
+# FUNCTIONS {{
 #===============================================================================
 
 #-------------------------------------------------------------------------------
@@ -276,14 +297,20 @@ add_current_directory_to_path() {
     path+=(`pwd`)
 }
 
+# }}
+
+# Precmd functions {{
 #------------------------------------------------------------------------------
 # Run precmd functions so we get our pimped out prompt
 #------------------------------------------------------------------------------
 precmd_functions=( precmd_prompt )
 
-#------------------------------------------------------------------------------
-# Add rmv scripts
-#------------------------------------------------------------------------------
+# }}
+
+# Add rmv scripts {{
+#-------------------------------------------------------------------------------
 source ~/.rvm/scripts/rvm
+
+# }}
 
 # EOF
