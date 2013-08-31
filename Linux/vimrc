@@ -137,12 +137,6 @@ set guioptions-=T
 set scrolloff=3
 
 "-----------------------------------------------------------------------------------
-" Show relative line numbers in cmd mode (Working to phase this one out)
-"-----------------------------------------------------------------------------------
-"autocmd InsertEnter * :set number
-"autocmd InsertLeave * :set relativenumber
-
-"-----------------------------------------------------------------------------------
 " Treat JSON files like JavaScript
 "-----------------------------------------------------------------------------------
 au BufNewFile,BufRead *.json set ft=javascript
@@ -271,6 +265,8 @@ nnoremap<Leader>nc :NosetestClass<CR>
 nnoremap<Leader>nm :NosetestMethod<CR>
 " --- grunt-karma test runner shortcut
 map <Leader>q :!grunt test<CR>"
+" --- Toggle relative line numbering
+nnoremap<Leader>tn :set relativenumber!<CR>
 " }
 
 " Plugin Configurations {
@@ -448,4 +444,6 @@ nnoremap <Leader>yp :let @" = expand("%:p")"<CR>:echo "Copied file path to clipb
 nnoremap <Leader>yf :let @"=expand("%:t")<CR>:echo "Copied file name to clipboard"<CR>
 " Copy current buffer path without filename to system clipboard
 nnoremap <Leader>yd :let @"=expand("%:h")<CR>:echo "Copied file directory to clipboard"<CR>
+" --- Toggle relative line numbering
+nnoremap<Leader>tn :set relativenumber!<CR>
 " }
