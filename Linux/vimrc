@@ -170,6 +170,16 @@ map <Down> <Nop>
  
 " Status line {
 "-----------------------------------------------------------------------------------
+" Used in the status line to indicate when in paste mode
+"-----------------------------------------------------------------------------------
+function! PasteModeCheck()
+    if &paste
+        return '[>>> PASTE <<<] '
+    en
+        return ''
+endfunction
+
+"-----------------------------------------------------------------------------------
 set laststatus=2                " Make the second to last line of vim our status line
 set statusline=%F                              " File path
 set statusline+=%m%r%h%w                       " Flags
@@ -182,6 +192,7 @@ set statusline+=%=                             " Right align the rest of the sta
 set statusline+=\ [R%04l,C%04v]                " Cursor position in the file row, column
 " set statusline+=\ [%p%%]                     " Percentage of the file the active line is
 set statusline+=\ [LEN=%L]                     " Number of line in the file
+set statusline+=\ %{PasteModeCheck()}          " If in paste mode display a message
 " set statusline+=%#warningmsg#                " Highlights the syntastic errors in red
 " set statusline+=%{SyntasticStatuslineFlag()} " Adds the line number and error count
 set statusline+=%*                             " Fill the width of the vim window
