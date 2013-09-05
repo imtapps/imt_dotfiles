@@ -18,15 +18,15 @@ local -A pr_com
 local -a prompt_left_lines
 
 zstyle ":pr_jrock:" mode full
-zstyle ':pr_jrock:*' hooks pwd usr vcs venv rvm jobs prompt
+zstyle ':pr_jrock:*' hooks pwd usr vcs venv rvm npm jobs prompt
 zstyle ':pr_jrock:*' pwd "%~"
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:(git*):*' get-revision true
 zstyle ':vcs_info:(git*):*' check-for-changes true
-zstyle ':vcs_info:(git*)' formats "(%s) %c%u %b%m"
-zstyle ':vcs_info:(git*)' actionformats "(%s|${white}%a${gray}) %c%u %b%m"
-zstyle ':vcs_info:(git*):*' stagedstr "${green}Staged ${gray}"
-zstyle ':vcs_info:(git*):*' unstagedstr "${red}Unstaged${gray}"
+zstyle ':vcs_info:(git*)' formats "(%b%c%u%m)"
+zstyle ':vcs_info:(git*)' actionformats "(%b|${red}%a${gray}%c%u%m)"
+zstyle ':vcs_info:(git*):*' stagedstr "${green} Staged${gray}"
+zstyle ':vcs_info:(git*):*' unstagedstr "${red} Unstaged${gray}"
 zstyle ':vcs_info:git*+set-message:*' hooks git-st git-stash git-untracked
 
 function pr_run_hooks() {
@@ -55,9 +55,19 @@ function pr_run_hooks() {
 }
 
 function +pr-mode-full() {
-    local i info_line_width return_status_width filler v_shim rvm_shim
+    local i info_line_width return_status_width filler v_shim rvm_shim npm_shim
 
     infoline=( ${pr_com[pwd]} ${pr_com[usr]} )
+
+    [[ -n ${pr_com[npm]} ]] && infoline[1]=(
+        ${infoline[1]}
+        "${cyan} n${gray}(${pr_com[npm]}${gray})${reset}"
+    )
+
+    npm_shim=0
+    if [[ -n ${pr_com[npm]} ]]; then
+        npm_shim+=1
+    fi
 
     [[ -n ${pr_com[rvm]} ]] && infoline[1]=(
         ${infoline[1]}
@@ -83,7 +93,7 @@ function +pr-mode-full() {
     info_line_width=${#${(%)info_line_width}}
     return_status_width=3
 
-    filler="${gray}${(l:$(( $COLUMNS - $info_line_width - $return_status_width + $v_shim + $rvm_shim))::─:)}${reset}"
+    filler="${gray}${(l:$(( $COLUMNS - $info_line_width - $return_status_width + $v_shim + $rvm_shim + $npm_shim))::─:)}${reset}"
     infoline[-1]=( ${filler} ${infoline[-1]} )
 
     lines=(
@@ -145,6 +155,20 @@ function +pr-rvm() {
     fi
 
     pr_com[rvm]=${(j::)v_rvm}
+}
+
+function +pr-npm() {
+    local -a v_npm
+
+    if [[ ${NODE_NAME}  != "" ]]; then
+        v_npm=(
+            ${cyan}
+            ${NODE_NAME}
+            ${reset}
+        )
+    fi
+
+    pr_com[npm]=${(j::)v_npm}
 }
 
 function +pr-jobs() {

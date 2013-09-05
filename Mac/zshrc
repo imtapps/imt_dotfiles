@@ -158,7 +158,7 @@ alias ts='tig status'
 
 # }}
 
-# FUNCTIONS {{
+# Functions {{
 #===============================================================================
 
 #-------------------------------------------------------------------------------
@@ -204,17 +204,15 @@ spell (){
 
 #--------------------------------------------------------------------
 # If we cd into a directory that is named the same as a virtualenv
-# auto activate that cirtualenv
+# auto activate that virtualenv
 # -------------------------------------------------------------------
 [[ -a /usr/local/share/python/virtualenvwrapper.sh ]] && source /usr/local/share/python/virtualenvwrapper.sh
 [[ -a /usr/local/bin/virtualenvwrapper.sh ]] && source /usr/local/bin/virtualenvwrapper.sh
 
 workon_virtualenv() {
-  if [[ -d .git ]]
-  then
+  if [[ -d .git ]]; then
      VENV_CUR_DIR="${PWD##*/}"
-     if [[ -a ~/.virtualenvs/$VENV_CUR_DIR ]]
-     then
+     if [[ -a ~/.virtualenvs/$VENV_CUR_DIR ]]; then
        deactivate > /dev/null 2>&1
        source ~/.virtualenvs/$VENV_CUR_DIR/bin/activate
      fi
@@ -235,6 +233,7 @@ workon_node_env() {
   if [[ -d "node_modules" ]]; then
 
     export NPM_ORIGINAL_PATH=$PATH
+    eval NODE_NAME=$(basename $(pwd))
 
     for f in `ls $(pwd)/node_modules/`
     do
@@ -244,13 +243,14 @@ workon_node_env() {
     deactivatenode(){
       export PATH=$NPM_ORIGINAL_PATH
       unset -f deactivatenode
+      unset NODE_NAME
     }
-
   fi
 }
 
 alias before_node_env_cd=cd
 node_cd(){
+  unset NODE_NAME
   before_node_env_cd "$@" && workon_node_env
 }
 alias cd=node_cd
