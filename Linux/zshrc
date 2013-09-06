@@ -212,12 +212,6 @@ workon_virtualenv() {
   fi
 }
 
-alias builtin_cd=cd
-virtualenv_cd() {
-  builtin_cd "$@" && workon_virtualenv
-}
-alias cd=virtualenv_cd
-
 #--------------------------------------------------------------------
 # If we cd into a directory that contains a directory named node_modules
 # we automatically recursively add it to the $PATH
@@ -241,12 +235,15 @@ workon_node_env() {
   fi
 }
 
-alias before_node_env_cd=cd
-node_cd(){
+#--------------------------------------------------------------------
+# Run the virtual environments functions for the prompt on each cd
+# -------------------------------------------------------------------
+cd() {
+  builtin cd "$@" 
   unset NODE_NAME
-  before_node_env_cd "$@" && workon_node_env
+  workon_virtualenv
+  workon_node_env
 }
-alias cd=node_cd
 
 #--------------------------------------------------------------------
 # Search for running processes
