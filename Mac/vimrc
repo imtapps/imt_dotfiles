@@ -67,6 +67,7 @@ set nocompatible
  Bundle 'https://github.com/jmcantrell/vim-virtualenv.git'
  Bundle 'https://github.com/nono/vim-handlebars'
  Bundle 'https://github.com/JarrodCTaylor/vim-python-test-runner'
+ Bundle 'https://github.com/tpope/vim-rails'
 " }
 
 " General Settings {
