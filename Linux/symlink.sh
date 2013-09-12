@@ -16,6 +16,7 @@ rm -rf ~/.oh-my-zsh
 rm -rf ~/.slate
 rm -rf ~/.tmux.conf
 rm -rf ~/.zshrc
+rm -rf ~/.gitconfig
 rm -rf ~/README
 
 # Symlink the new config files. Assumes files are saved in ~/imt_dotfiles
@@ -28,6 +29,7 @@ ln -s ~/imt_dotfiles/Linux/zsh_prompt ~/.zsh_prompt
 ln -s ~/imt_dotfiles/Linux/zsh-syntax-highlighting.zsh ~/zsh-syntax-highlighting.zsh
 ln -s ~/imt_dotfiles/Linux/zshrc ~/.zshrc
 ln -s ~/imt_dotfiles/Linux/ackrc ~/.ackrc
+ln -s ~/imt_dotfiles/Linux/gitconfig ~/.gitconfig
 
 # Clone vundle so we can update vim plugins
 git clone https://github.com/gmarik/vundle.git ~/imt_dotfiles/Linux/vim/bundle/vundle
