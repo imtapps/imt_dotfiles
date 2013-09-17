@@ -13,3 +13,6 @@ setlocal expandtab
 
 " Make sure we use the correct comment string in vim-commentary plug-in
 set commentstring=#\ %s
+
+" Unfold python files when we open them
+exec "normal! zR"
