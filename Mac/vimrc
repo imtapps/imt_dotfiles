@@ -1,16 +1,16 @@
-" vim: set foldmarker={,} foldlevel=1 foldmethod=marker:
+" vim: set foldmarker={,} foldlevel=0 foldmethod=marker:
 "===================================================================================
 "  DESCRIPTION:  Enterprise Ready Development Environment
-" .__         __                                
+" .__         __
 " |__| ______/  |_  _____  ______ ______  ______
 " |  |/     \   __\ \__  \ \____ \\____ \/  ___/
-" |  |  Y Y  \  |    / __ \|  |_> >  |_> >___ \ 
+" |  |  Y Y  \  |    / __ \|  |_> >  |_> >___ \
 " |__|__|_|  /__|   (____  /   __/|   __/____  >
-"          \/            \/|__|   |__|       \/  
-"  
+"          \/            \/|__|   |__|       \/
+"
 "===================================================================================
-" 
- 
+"
+
 " Set nocompatible {
 "-----------------------------------------------------------------------------------
 " Use Vim settings, rather then Vi settings. This must be first, because it changes
@@ -35,7 +35,7 @@ set nocompatible
 "-----------------------------------------------------------------------------------
 " Required for vundle to work
 "-----------------------------------------------------------------------------------
- filetype off                   
+ filetype off
  set rtp+=~/.vim/bundle/vundle/
  call vundle#rc()
  Bundle 'gmarik/vundle'
@@ -69,6 +69,7 @@ set nocompatible
  Bundle 'https://github.com/JarrodCTaylor/vim-python-test-runner'
  Bundle 'https://github.com/tpope/vim-rails'
  Bundle 'https://github.com/tmhedberg/SimpylFold'
+ Bundle 'https://github.com/bling/vim-airline'
 " }
 
 " General Settings {
@@ -84,18 +85,18 @@ filetype  indent on
 " Color scheme and fonts if gui (gvim) then mustang if command line zenburn
 "-----------------------------------------------------------------------------------
 if has("gui_running")
-	colorscheme mustang
-	set guifont=Monospace\ 12 
-	set antialias
-else 
-	set t_Co=256
+    colorscheme mustang
+    set guifont=Monospace\ 12
+    set antialias
+else
+    set t_Co=256
     colorscheme zenburn
 endif
 "
 "-----------------------------------------------------------------------------------
 " Switch syntax highlighting on.
 "-----------------------------------------------------------------------------------
-syntax on            
+syntax on
 "
 "-----------------------------------------------------------------------------------
 " Various settings
@@ -126,7 +127,8 @@ set hidden                             " Don't unload the buffer when we switch 
 set visualbell                         " Visual bell instead of beeping
 set wildignore=*.swp,*.bak,*.pyc,*.class,node_modules/**  " wildmenu: ignore these extensions
 set wildmenu                           " Command-line completion in an enhanced mode
-set shell=bash                         " Required to let zsh know how to run things on command line 
+set shell=bash                         " Required to let zsh know how to run things on command line
+set ttimeoutlen=50                     " Fix delay when escaping from insert with Esc
 
 "-----------------------------------------------------------------------------------
 " Turn off the toolbar that is under the menu in gvim
@@ -158,7 +160,7 @@ if has("autocmd")
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
         \   exe "normal! g`\"" |
         \ endif
-endif " has("autocmd")
+endif
 
 "-----------------------------------------------------------------------------------
 " Take away Joel's trainer wheels
@@ -169,58 +171,25 @@ map <Up> <Nop>
 map <Down> <Nop>
 
 " }
- 
+
 " Status line {
-"-----------------------------------------------------------------------------------
-" Used in the status line to indicate when in paste mode
-"-----------------------------------------------------------------------------------
-function! PasteModeCheck()
-    if &paste
-        return '[>>> PASTE <<<] '
-    en
-        return ''
-endfunction
-
-"-----------------------------------------------------------------------------------
-set laststatus=2                " Make the second to last line of vim our status line
-set statusline=%F                              " File path
-set statusline+=%m%r%h%w                       " Flags
-" set statusline+=\ %{fugitive#statusline()}   " Git branch
-" set statusline+=\ [FORMAT=%{&ff}]            " File format
-" set statusline+=\ [TYPE=%Y]                  " File type
-" set statusline+=\ [ASCII=\%03.3b]            " ASCII value of character under cursor
-" set statusline+=\ [HEX=\%02.2B]              " HEX value of character under cursor
-set statusline+=%=                             " Right align the rest of the status line
-set statusline+=\ [R%04l,C%04v]                " Cursor position in the file row, column
-" set statusline+=\ [%p%%]                     " Percentage of the file the active line is
-set statusline+=\ [LEN=%L]                     " Number of line in the file
-set statusline+=\ %{PasteModeCheck()}          " If in paste mode display a message
-" set statusline+=%#warningmsg#                " Highlights the syntastic errors in red
-" set statusline+=%{SyntasticStatuslineFlag()} " Adds the line number and error count
-set statusline+=%*                             " Fill the width of the vim window
-"
-"-----------------------------------------------------------------------------------
-" Change the background color of the status line based on the mode. 
-" Insert mode = Green, Replace = Purple, command = Gray
-"-----------------------------------------------------------------------------------
-function! InsertStatuslineColor(mode)
-  if a:mode == 'i'
-    hi statusline guibg=Green ctermfg=34 guifg=Black ctermbg=0
-  elseif a:mode == 'r'
-    hi statusline guibg=Purple ctermfg=5 guifg=Black ctermbg=0
-  else
-    hi statusline guibg=DarkRed ctermfg=124 guifg=Black ctermbg=0
-  endif
-endfunction
-
-au InsertEnter * call InsertStatuslineColor(v:insertmode)
-au InsertLeave * hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
+set laststatus=2                                    " Make the second to last line of vim our status line
+let g:airline_theme='understated'                   " Use the custom theme I wrote
+let g:airline_left_sep=''                           " No separator as they seem to look funky
+let g:airline_right_sep=''                          " No separator as they seem to look funky
+let g:airline#extensions#branch#enabled = 0         " Do not show the git branch in the status line
+let g:airline#extensions#syntastic#enabled = 1      " Do show syntastic warnings in the status line
+let g:airline#extensions#tabline#show_buffers = 0   " Do not list buffers in the status line
+let g:airline_section_x = ''                        " Do not list the filetype or virtualenv in the status line
+let g:airline_section_y = '[R%04l,C%04v] [LEN=%L]'  " Replace file encoding and file format info with file position
+let g:airline_section_z = ''                        " Do not show the default file position info
+let g:airline_section_warning = ''                  " Do not show the syntastic information in the status line
 " }
 
 " Jarrod's Remapped Keys {
 "===================================================================================
 "  (nore) prefix -- non-recursive
-"  (un)   prefix -- Remove a mode-specific map 
+"  (un)   prefix -- Remove a mode-specific map
 "  Commands                        Mode
 "  --------                        ----
 "  map                             Normal, Visual, Select, Operator Pending modes
@@ -234,14 +203,14 @@ au InsertLeave * hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
 "===================================================================================
 "
 " --- change mapleader from \ to 9 as I find that easier to type
-let mapleader="9"  
-" --- jk mapped to <Esc> so we can keep our fingers on the home row 
+let mapleader="9"
+" --- jk mapped to <Esc> so we can keep our fingers on the home row
 imap jk <Esc>
 " --- ss will toggle spell checking
 map ss :setlocal spell!<CR>
-" --- toggle NERDTree 
+" --- toggle NERDTree
 nnoremap <Leader>nt :NERDTreeToggle<CR>
-" --- toggle Tagbar 
+" --- toggle Tagbar
 nnoremap <Leader>tb :TagbarToggle<CR>
 " --- open CtrlP buffer explorer
 nnoremap <Leader>b :CtrlPBuffer<CR>
@@ -264,11 +233,11 @@ nnoremap <Leader>rt :call RenewTagsFile()<CR>
 " --- Strip trailing whitespace
 nnoremap <Leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 " --- Better window navigation E.g. now use Ctrl+j instead of Ctrl+W+j
-nnoremap <C-j> <C-w>j  
+nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
-" --- Shortcuts for test running commands 
+" --- Shortcuts for test running commands
 nnoremap<Leader>da :DjangoTestApp<CR>
 nnoremap<Leader>df :DjangoTestFile<CR>
 nnoremap<Leader>dc :DjangoTestClass<CR>
@@ -280,6 +249,11 @@ nnoremap<Leader>nm :NosetestMethod<CR>
 map <Leader>q :!grunt test<CR>"
 " --- Toggle relative line numbering
 nnoremap<Leader>tn :set relativenumber!<CR>
+" --- Shortcut to RenameFile function defined below
+map <Leader>rf :call RenameFile()<CR>
+" --- Shortcut to CopyFile function defined below
+map <Leader>cf :call CopyFile()<CR>
+
 " }
 
 " Plugin Configurations {
@@ -314,7 +288,7 @@ let g:ctrlp_max_height = 18
 "
 "-----------------------------------------------------------------------------------
 " Exuberant ctags configurations
-" Vim will look for a ctags file in the current directory and continue 
+" Vim will look for a ctags file in the current directory and continue
 " up the file path until it finds one
 "-----------------------------------------------------------------------------------
 " Enable ctags support
@@ -339,7 +313,7 @@ let g:jedi#popup_on_dot = 0
 let g:ctrlp_reuse_window = 'startify'
 let g:startify_change_to_dir = 0
 " Highlight the acsii banner with red font
-hi StartifyHeader ctermfg=124   
+hi StartifyHeader ctermfg=124
 " Set the contents of the banner
 let g:startify_custom_header = [
             \ '               AAAAAAAA       PPPPPPPPPPPPP      PPPPPPPPPPPPP        SSSSSSSSSS     ',
