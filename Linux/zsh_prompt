@@ -2,7 +2,7 @@ autoload -U colors && colors
 autoload -U promptinit
 autoload -Uz vcs_info
 
-local reset white gray green red yellow blue cyan magenta black 
+local reset white gray green red yellow blue cyan magenta black
 reset="%{${reset_color}%}"
 white="%{$fg[white]%}"
 gray="%{$fg_bold[black]%}"
@@ -20,14 +20,12 @@ local -a prompt_left_lines
 zstyle ":pr_jrock:" mode full
 zstyle ':pr_jrock:*' hooks pwd usr vcs venv rvm npm jobs prompt
 zstyle ':pr_jrock:*' pwd "%~"
+
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:(git*):*' get-revision true
 zstyle ':vcs_info:(git*):*' check-for-changes true
-zstyle ':vcs_info:(git*)' formats "(%b%c%u%m)"
-zstyle ':vcs_info:(git*)' actionformats "(%b|${red}%a${gray}%c%u%m)"
-zstyle ':vcs_info:(git*):*' stagedstr "${green} Staged${gray}"
-zstyle ':vcs_info:(git*):*' unstagedstr "${red} Unstaged${gray}"
-zstyle ':vcs_info:git*+set-message:*' hooks git-st git-stash git-untracked
+zstyle ':vcs_info:(git*)' formats "(%b%m)"
+zstyle ':vcs_info:(git*)' actionformats "(%b|${red}%a${gray}%m)"
+zstyle ':vcs_info:git*+set-message:*' hooks git-statuses git-st
 
 function pr_run_hooks() {
     local hook func
@@ -78,7 +76,7 @@ function +pr-mode-full() {
     if [[ -n ${pr_com[rvm]} ]]; then
         rvm_shim+=1
     fi
-     
+
     [[ -n ${pr_com[venv]} ]] && infoline[1]=(
         ${infoline[1]}
         "${blue} v${gray}(${pr_com[venv]}${gray})${reset}"
@@ -222,22 +220,27 @@ function +vi-git-st-compact() {
         && hook_com[misc]="@{u}${(j:/:)user_data[gitstatus]}"
 }
 
-function +vi-git-stash() {
-    local -a stashes
+function +vi-git-statuses() {
+    git status -s >| /tmp/gitstatus.txt
+    staged=$( cat /tmp/gitstatus.txt | grep -c "^[MARCD]")
+    unstaged=$( cat /tmp/gitstatus.txt | grep -c "^.[MARCD]")
+    untracked=$( cat /tmp/gitstatus.txt | grep -c "^\?")
+    stashes=$(git stash list 2>/dev/null | wc -l | sed -e 's/^[ \t]*//')
 
-    if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
-        stashes=$(git stash list 2>/dev/null | wc -l | sed -e 's/^[ \t]*//')
-        hook_com[misc]+=" (${stashes} stashed)"
+    if [[ ${staged} != 0 ]] ; then
+        hook_com[misc]+=" ${green}Staged${gray}"
     fi
-}
 
-function +vi-git-untracked() {
-    local untracked
+    if [[ ${unstaged} != 0 ]] ; then
+        hook_com[misc]+=" ${red}Unstaged${gray}"
+    fi
 
-    untracked=${$(git ls-files --exclude-standard --others | head -n 1)}
+    if [[ ${untracked} != 0 ]] ; then
+        hook_com[misc]+=" ${yellow}Untracked${gray}"
+    fi
 
-    if [[ -n ${untracked} ]] ; then
-        hook_com[unstaged]="${hook_com[unstaged]}${yellow} Untracked${gray}"
+    if [[ ${stashes} != 0 ]] ; then
+        hook_com[misc]+=" ${gray}${stashes} stashed${gray}"
     fi
 }
 
