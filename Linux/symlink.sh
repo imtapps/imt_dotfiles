@@ -40,7 +40,7 @@ if [ ! -d ~/imt_dotfiles/Linux/vim/bundle/vundle ]; then
 fi
 
 echo -n "Would you like to configure you git name and email? (y/n) => "; read answer
-if [[ $answer = "Y" ]] || [[ $answer = "y" ]]; then
+if [ $answer = "Y" ] || [ $answer = "y" ]; then
     echo -n "What is your git user name => "; read name
     git config --global user.name "$name"
     echo -n "What is your git email => "; read email
@@ -48,7 +48,7 @@ if [[ $answer = "Y" ]] || [[ $answer = "y" ]]; then
 fi
 
 echo -n "Would you like to use the new prompt with only counts for the git status (y/n) => "; read answer
-if [[ $answer = "Y" ]] || [[ $answer = "y" ]]; then
+if [ $answer = "Y" ] || [ $answer = "y" ]; then
     ln -s ~/imt_dotfiles/Linux/zsh_prompt_count ~/.zsh_prompt
 else
     ln -s ~/imt_dotfiles/Linux/zsh_prompt ~/.zsh_prompt
