@@ -245,6 +245,7 @@ nnoremap<Leader>dm :DjangoTestMethod<CR>
 nnoremap<Leader>nf :NosetestFile<CR>
 nnoremap<Leader>nc :NosetestClass<CR>
 nnoremap<Leader>nm :NosetestMethod<CR>
+nnoremap<Leader>rr :RerunLastTests<CR>
 " --- grunt-karma test runner shortcut
 map <Leader>q :!grunt test<CR>"
 " --- Toggle relative line numbering
@@ -400,6 +401,7 @@ map <Leader>ta :DjangoTestApp<CR>
 map <Leader>tf :DjangoTestFile<CR>
 map <Leader>tc :DjangoTestClass<CR>
 map <Leader>tm :DjangoTestMethod<CR>
+nnoremap<Leader>ta :RerunLastTests<CR>
 " --- search the ctags index file for anything by class or method name
 map <Leader>fs :CtrlPTag<CR>
 " --- search all files in the current files directory
