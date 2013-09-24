@@ -4,7 +4,6 @@
 ##
 rm -rf ~/.tmux
 rm -rf ~/.zsh-custom
-rm -rf ~/.emacs.d
 rm -rf ~/.gemrc
 rm -rf ~/.gitignore
 rm -rf ~/.gitmodules
