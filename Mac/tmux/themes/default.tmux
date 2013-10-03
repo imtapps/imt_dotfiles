@@ -27,7 +27,7 @@ set -g status-interval 4
 # window status
 # -------------
 setw -g window-status-format "#[fg=black]#[bg=colour7] #I #[fg=black]#[bg=colour15] #W "
-setw -g window-status-current-format "#[fg=colour8]#[bg=white] #I #[bg=colour69]#[fg=black] #W "
+setw -g window-status-current-format "#[fg=colour8]#[bg=white] #I #[bg=colour69]#[fg=white] #W "
 setw -g window-status-current-bg black
 setw -g window-status-current-fg yellow
 setw -g window-status-current-attr bold
