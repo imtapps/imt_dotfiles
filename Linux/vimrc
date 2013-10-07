@@ -49,7 +49,7 @@ set nocompatible
  Bundle 'https://github.com/Raimondi/delimitMate'
  Bundle 'https://github.com/vim-scripts/L9'
  Bundle 'https://github.com/scrooloose/nerdtree'
- Bundle 'https://github.com/JarrodCTaylor/vim-color-menu'
+ Bundle 'https://github.com/JarrodCTaylor/vim-256-color-schemes'
  Bundle 'https://github.com/tpope/vim-fugitive'
  " Must have exuberant-ctags for tagbar to work
  Bundle 'https://github.com/majutsushi/tagbar'
@@ -67,10 +67,12 @@ set nocompatible
  Bundle 'https://github.com/jmcantrell/vim-virtualenv.git'
  Bundle 'https://github.com/nono/vim-handlebars'
  Bundle 'https://github.com/JarrodCTaylor/vim-python-test-runner'
+ Bundle 'https://github.com/tpope/vim-rails'
  Bundle 'https://github.com/tmhedberg/SimpylFold'
  Bundle 'https://github.com/bling/vim-airline'
  Bundle 'https://github.com/kien/rainbow_parentheses.vim'
  Bundle 'https://github.com/tpope/vim-fireplace'
+ Bundle 'https://github.com/JarrodCTaylor/vim-js2coffee'
 " }
 
 " General Settings {
@@ -85,14 +87,8 @@ filetype  indent on
 "-----------------------------------------------------------------------------------
 " Color scheme and fonts if gui (gvim) then mustang if command line zenburn
 "-----------------------------------------------------------------------------------
-if has("gui_running")
-    colorscheme mustang
-    set guifont=Monospace\ 12
-    set antialias
-else
-    set t_Co=256
-    colorscheme zenburn
-endif
+set t_Co=256
+colorscheme understated
 "
 "-----------------------------------------------------------------------------------
 " Switch syntax highlighting on.
@@ -373,6 +369,11 @@ let g:rbpt_colorpairs = [
     \ ]
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
+
+"-----------------------------------------------------------------------------------
+" SuperTab
+"-----------------------------------------------------------------------------------
+let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " }
 
