@@ -134,6 +134,7 @@ fi
 alias ls='ls -F --color'
 alias ll='ls -lh'
 alias la='ls -la'
+alias l='ls'
 alias lls='ll -Sr'
 alias less='less -imJMW'
 alias update='sudo apt-get update && sudo apt-get upgrade'

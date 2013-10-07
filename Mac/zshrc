@@ -1,14 +1,14 @@
 #!/bin/zsh
 # vim: set foldmarker={{,}} foldlevel=1 foldmethod=marker:
 #===================================================================================
-#                 .__                   
-#  ________  _____|  |_________   ____  
-#  \___   / /  ___/  |  \_  __ \_/ ___\ 
-#   /    /  \___ \|   Y  \  | \/\  \___ 
+#                 .__
+#  ________  _____|  |_________   ____
+#  \___   / /  ___/  |  \_  __ \_/ ___\
+#   /    /  \___ \|   Y  \  | \/\  \___
 #  /_____ \/____  >___|  /__|    \___  >
-#        \/     \/     \/            \/ 
+#        \/     \/     \/            \/
 #===================================================================================
-# 
+#
 
 # General Settings {{
 #-------------------------------------------------------------------------------
@@ -139,6 +139,7 @@ fi
 alias ls='ls -FHG'
 alias ll='ls -lh'
 alias la='ls -la'
+alias l='ls'
 alias lls='ll -Sr'
 alias less='less -imJMW'
 alias update='brew update && brew upgrade'
@@ -167,7 +168,7 @@ alias ts='tig status'
 #===============================================================================
 
 #-------------------------------------------------------------------------------
-#  Python webserver: cd into a directory you want to share and then 
+#  Python webserver: cd into a directory you want to share and then
 #                    type webshare. You will be able to connect to that directory
 #                    with other machines on the local net work with IP:8000
 #                    the function will display the current machines ip address
@@ -180,24 +181,24 @@ function webshare() {
 
 #-------------------------------------------------------------------------------
 # A timer function that will say the message and display a pop-up
-# after the specified amount of time. 
+# after the specified amount of time.
 #-------------------------------------------------------------------------------
-function workTimer() { 
-	echo -n "How long to set timer for? (ex. 1h, 10m, 20s, etc) => "; read duration
-	echo -n "What to words_to_say when done => "; read words_to_say
-	sleep $duration && say "$words_to_say"
+function workTimer() {
+    echo -n "How long to set timer for? (ex. 1h, 10m, 20s, etc) => "; read duration
+    echo -n "What to words_to_say when done => "; read words_to_say
+    sleep $duration && say "$words_to_say"
 }
 
 #-------------------------------------------------------------------------------
 # Shows the specified number of the top memory consuming processes and their PID
 #-------------------------------------------------------------------------------
 function mem_usage() {
-	echo -n "How many you what to see? "; read number
-	echo ""
-	echo "Mem Size       PID     Process"
-	echo "============================================================================="
-	ps aux | awk '{ output = sprintf("%5d Mb --> %5s --> %s%s%s%s", $6/1024, $2, $11, $12, $13, $14); print output }' | sort -gr | head --line $number
-	}
+    echo -n "How many you what to see? "; read number
+    echo ""
+    echo "Mem Size       PID     Process"
+    echo "============================================================================="
+    ps aux | awk '{ output = sprintf("%5d Mb --> %5s --> %s%s%s%s", $6/1024, $2, $11, $12, $13, $14); print output }' | sort -gr | head --line $number
+    }
 
 
 #------------------------------------------------------------------------------
@@ -251,7 +252,7 @@ workon_node_env() {
 # Run the virtual environments functions for the prompt on each cd
 # -------------------------------------------------------------------
 cd() {
-  builtin cd "$@" 
+  builtin cd "$@"
   unset NODE_NAME
   workon_virtualenv
   workon_node_env
@@ -288,8 +289,8 @@ echo $PATH | tr ":" "\n" | \
 #--------------------------------------------------------------------
 # Displays mounted drive information in a nicely formatted manner
 # -------------------------------------------------------------------
-function nicemount() { 
-    (echo "DEVICE PATH TYPE FLAGS" && mount | awk '$2="";1') | column -t ; 
+function nicemount() {
+    (echo "DEVICE PATH TYPE FLAGS" && mount | awk '$2="";1') | column -t ;
 }
 
 #--------------------------------------------------------------------
