@@ -468,4 +468,6 @@ nnoremap <Leader>yf :let @"=expand("%:t")<CR>:echo "Copied file name to clipboar
 nnoremap <Leader>yd :let @"=expand("%:h")<CR>:echo "Copied file directory to clipboard"<CR>
 " --- Toggle relative line numbering
 nnoremap<Leader>tn :set relativenumber!<CR>
+" --- Shortcut to surround inner words
+nmap<Leader>s ysiw
 " }
