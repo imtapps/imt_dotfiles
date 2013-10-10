@@ -153,6 +153,10 @@ alias stopdb='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 alias gs='git status'
 alias gd='git diff'
 alias ts='tig status'
+alias tmuxh='tmux attach -t host-session || tmux new-session -s host-session'
+alias tmuxp='tmux attach -t pair-session || tmux new-session -t host-session -s pair-session'
+alias rogue='tmux switch-client -t "pair-session"; tmux display-message "Entering Rogue Mode"'
+alias buddy='tmux switch-client -t "host-session"; tmux display-message "Entering Buddy Mode"'
 
 # }}
 
