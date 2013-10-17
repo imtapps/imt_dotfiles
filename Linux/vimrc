@@ -424,6 +424,8 @@ nnoremap <Leader>ff :CtrlP<CR>
 map .. :w<CR>
 " -- spell check
 noremap <Leader>sp :set spell spelllang=en_us<CR>
+" --- toggle Tagbar
+nnoremap <Leader>tb :TagbarToggle<CR>
 " --- like grep on steroids
 map <Leader>a :Ack!<space>
 " --- basic file system navigation view
