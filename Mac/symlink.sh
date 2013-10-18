@@ -38,7 +38,7 @@ if [ ! -d ~/imt_dotfiles/Mac/vim/bundle/vundle ]; then
     git clone https://github.com/gmarik/vundle.git ~/imt_dotfiles/Mac/vim/bundle/vundle
 fi
 
-echo -n "Would you like to configure you git name and email? (y/n) => "; read answer
+echo -n "Would you like to configure your git name and email? (y/n) => "; read answer
 if [[ $answer = "Y" ]] || [[ $answer = "y" ]]; then
     echo -n "What is your git user name => "; read name
     git config --global user.name "$name"
