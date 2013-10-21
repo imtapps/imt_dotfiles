@@ -231,11 +231,7 @@ workon_node_env() {
 
     export NPM_ORIGINAL_PATH=$PATH
     eval NODE_NAME=$(basename $(pwd))
-
-    for f in `ls $(pwd)/node_modules/`
-    do
-      export PATH="${PATH}:$(pwd)/node_modules/${f}bin"
-    done
+    export PATH="${PATH}:$(pwd)/node_modules/.bin"
 
     deactivatenode(){
       export PATH=$NPM_ORIGINAL_PATH
