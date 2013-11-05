@@ -72,6 +72,9 @@ set nocompatible
  Bundle 'https://github.com/tpope/vim-fireplace'
  Bundle 'https://github.com/JarrodCTaylor/vim-js2coffee'
  Bundle 'https://github.com/sjl/gundo.vim'
+ Bundle 'https://github.com/nelstrom/vim-markdown-folding'
+ Bundle 'https://github.com/tpope/vim-markdown'
+ Bundle 'https://github.com/mmai/wikilink'
 " }2
 " }1
 
@@ -363,6 +366,14 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 "-----------------------------------------------------------------------------------
 let g:gundo_preview_bottom = 1
 " }2
+" Vim-Markdown-Folding {2
+"-----------------------------------------------------------------------------------
+let g:markdown_fold_style = 'nested'
+" }2
+" Vim-Markdown {2
+"-----------------------------------------------------------------------------------
+let g:markdown_fenced_languages = ['python', 'sh', 'vim', 'javascript', 'html', 'clojure', 'css', 'c', 'sql', 'java']
+"}2
 " }1
 
 " Misc Functions {1
