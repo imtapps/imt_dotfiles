@@ -74,7 +74,7 @@ set nocompatible
  Bundle 'https://github.com/sjl/gundo.vim'
  Bundle 'https://github.com/nelstrom/vim-markdown-folding'
  Bundle 'https://github.com/tpope/vim-markdown'
- Bundle 'https://github.com/mmai/wikilink'
+ Bundle 'https://github.com/JarrodCTaylor/wikilink'
 " }2
 " }1
 
