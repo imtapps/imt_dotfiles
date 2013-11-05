@@ -156,12 +156,12 @@ if has("autocmd")
         \ endif
 endif
 " }2
-" Take away Joel's trainer wheels {2
+" Make arrowkey resize viewports {2
 "-----------------------------------------------------------------------------------
-map <Left> <Nop>
-map <Right> <Nop>
-map <Up> <Nop>
-map <Down> <Nop>
+nnoremap <Left> :vertical resize +1<CR>
+nnoremap <Right> :vertical resize -1<CR>
+nnoremap <Up> :resize +1<CR>
+nnoremap <Down> :resize -1<CR>
 " }2
 " }1
 
