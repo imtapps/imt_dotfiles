@@ -222,7 +222,7 @@ nnoremap <Leader>a :Ack!<space>
 " --- Toggle Syntastic
 nnoremap <Leader>ts :SyntasticToggleMode<CR>
 " --- Clear the search buffer and highlighted text with enter press
-:nnoremap <CR> :nohlsearch<CR>
+:nnoremap <Space> :nohlsearch<CR>
 " --- Search the ctags index file for anything by class or method name
 map <Leader>st :CtrlPTag<CR>
 " --- Refresh the ctags file
