@@ -59,7 +59,6 @@ set nocompatible
  Bundle 'https://github.com/kien/ctrlp.vim'
  Bundle 'https://github.com/tpope/vim-commentary'
  Bundle 'https://github.com/davidhalter/jedi-vim'
- Bundle 'https://github.com/goldfeld/vim-seek.git'
  Bundle 'https://github.com/mhinz/vim-startify'
  Bundle 'https://github.com/tpope/vim-surround'
  Bundle 'https://github.com/jmcantrell/vim-virtualenv.git'
@@ -75,6 +74,7 @@ set nocompatible
  Bundle 'https://github.com/nelstrom/vim-markdown-folding'
  Bundle 'https://github.com/tpope/vim-markdown'
  Bundle 'https://github.com/JarrodCTaylor/wikilink'
+ Bundle 'https://github.com/justinmk/vim-sneak'
 " }2
 " }1
 
@@ -265,6 +265,7 @@ let g:syntastic_python_checkers = ['flake8']      " sets flake8 as the default f
 let g:syntastic_javascript_checkers = ['jshint']  " sets jshint as our javascript linter
 " Ignore line width for syntax checking in python
 let g:syntastic_python_flake8_post_args='--ignore=E501'
+let g:syntastic_filetype_map = { 'handlebars.html': 'handlebars' }
 " }2
 " Neocomplcache configurations {2
 "-----------------------------------------------------------------------------------
@@ -373,6 +374,11 @@ let g:markdown_fold_style = 'nested'
 " Vim-Markdown {2
 "-----------------------------------------------------------------------------------
 let g:markdown_fenced_languages = ['python', 'sh', 'vim', 'javascript', 'html', 'clojure', 'css', 'c', 'sql', 'java']
+"}2
+" Vim-Sneak {2
+"-----------------------------------------------------------------------------------
+nmap f <Plug>SneakForward
+nmap F <Plug>SneakBackward
 "}2
 " }1
 
