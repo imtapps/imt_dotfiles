@@ -252,7 +252,7 @@ map <Leader>rf :call RenameFile()<CR>
 " --- Shortcut to CopyFile function defined below
 map <Leader>cf :call CopyFile()<CR>
 " --- Shortcut to toggle visual undo
-nnoremap<Leader>ud :GundoToggle<CR>
+nnoremap<Leader>u :GundoToggle<CR>
 " }2
 " }1
 
@@ -479,4 +479,6 @@ nnoremap <Leader>yd :let @"=expand("%:h")<CR>:echo "Copied file directory to cli
 nnoremap<Leader>tn :set relativenumber!<CR>
 " --- Shortcut to surround inner words
 nmap<Leader>s ysiw
+" --- Shortcut to toggle visual undo
+nnoremap<Leader>u :GundoToggle<CR>
 " }1
