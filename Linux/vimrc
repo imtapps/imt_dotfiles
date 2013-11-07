@@ -481,4 +481,10 @@ nnoremap<Leader>tn :set relativenumber!<CR>
 nmap<Leader>s ysiw
 " --- Shortcut to toggle visual undo
 nnoremap<Leader>u :GundoToggle<CR>
+" --- Emacs keys in insert mode
+" May the programming gods forgive me for these four lines
+imap <C-e> <C-o>$
+imap <C-a> <C-o>0
+imap <C-f> <C-o>l
+imap <C-b> <C-o>h
 " }1
