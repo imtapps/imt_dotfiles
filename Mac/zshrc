@@ -1,5 +1,5 @@
 #!/bin/zsh
-# vim: set foldmarker={{,}} foldlevel=1 foldmethod=marker:
+# vim: set foldmarker=<<,>> foldlevel=1 foldmethod=marker:
 #===================================================================================
 #                 .__
 #  ________  _____|  |_________   ____
@@ -10,31 +10,26 @@
 #===================================================================================
 #
 
-# General Settings {{
-#-------------------------------------------------------------------------------
-# Autoload colors and tab completion
+# General Settings <<1
+# Autoload colors and tab completion <<2
 #-------------------------------------------------------------------------------
 autoload -U colors && colors
 autoload -U compinit
 compinit -C
-
-#-------------------------------------------------------------------------------
-# Modify default zsh directory coloring on ls commands
+# >> 2
+# Modify default zsh directory coloring on ls commands <<2
 #-------------------------------------------------------------------------------
 export LSCOLORS=gxfxcxdxbxegedabagacad
-
-#-------------------------------------------------------------------------------
-# case-insensitive (all),partial-word and then substring completion
+# >>2
+# case-insensitive (all),partial-word and then substring completion <<2
 #-------------------------------------------------------------------------------
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-
-#-------------------------------------------------------------------------------
-# Local array variable
+# >>2
+# Local array variable <<2
 #-------------------------------------------------------------------------------
 local -a precmd_functions
-
-#-------------------------------------------------------------------------------
-# Set the desired setup options man zshoptions
+# >>2
+# Set the desired setup options man zshoptions <<2
 #-------------------------------------------------------------------------------
 setopt  auto_cd
 setopt  auto_pushd
@@ -50,35 +45,30 @@ setopt  mark_dirs
 setopt  path_dirs
 setopt  prompt_percent
 setopt  prompt_subst
-
-#-------------------------------------------------------------------------------
-# History settings
+# >>2
+# History settings <<2
 #-------------------------------------------------------------------------------
 HISTFILE=$HOME/.zsh_history
 HISTFILESIZE=65536
 HISTSIZE=4096
 SAVEHIST=4096
 REPORTTIME=60
-
-#-------------------------------------------------------------------------------
-# utf-8 in the terminal, will break stuff if your term isn't utf aware
+# >>2
+# utf-8 in the terminal, will break stuff if your term isn't utf aware <<2
 #-------------------------------------------------------------------------------
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
 export LC_COLLATE=C
-
-#-------------------------------------------------------------------------------
-# Set grepoptions
+# >>2
+# Set grepoptions <<2
 #-------------------------------------------------------------------------------
 export GREP_OPTIONS='--color=auto'
-
-#-------------------------------------------------------------------------------
-# Alows Mac to use the correct ctags, old version installed by default
+# >>2
+# Alows Mac to use the correct ctags, old version installed by default <<2
 #-------------------------------------------------------------------------------
 PATH="/usr/local/bin:$PATH"
-
-#-------------------------------------------------------------------------------
-# Editor and display configurations
+# >>2
+# Editor and display configurations <<2
 #-------------------------------------------------------------------------------
 export GIT_EDITOR='vim'
 export LESS='-imJMWR'
@@ -86,28 +76,25 @@ export PAGER="less $LESS"
 export MANPAGER=$PAGER
 export GIT_PAGER=$PAGER
 export BROWSER='chromium-browser'
-
-#-------------------------------------------------------------------------------
-# Silence Wine debugging output
+# >>2
+# Silence Wine debugging output <<2
 #-------------------------------------------------------------------------------
 export WINEDEBUG=-all
-
-#-------------------------------------------------------------------------------
-# Specify virtualenv directories
+# >>2
+# Specify virtualenv directories <<2
 #-------------------------------------------------------------------------------
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/VirtualDevEnvs
-
-#-------------------------------------------------------------------------------
-#
+# >>2
+# <<2 completion settings
 #-------------------------------------------------------------------------------
 zstyle ':completion:*' list-colors "$LS_COLORS"
 zstyle -e ':completion:*:(ssh|scp|sshfs|ping|telnet|nc|rsync):*' hosts '
     reply=( ${=${${(M)${(f)"$(<~/.ssh/config)"}:#Host*}#Host }:#*\**} )'
+# >>2
+# >>1
 
-# }}
-
-# Key Bindings {{
+# Key Bindings <<1
 #-------------------------------------------------------------------------------
 # Set emacs like key bindings
 #-------------------------------------------------------------------------------
@@ -117,9 +104,9 @@ bindkey '^R' history-incremental-search-backward
 bindkey '^R' history-incremental-pattern-search-backward
 bindkey '^?' backward-delete-char
 bindkey '^H' backward-delete-char
-# }}
+# >>1
 
-# Set up the prompt {{
+# Set up the prompt <<1
 #-------------------------------------------------------------------------------
 if [[ ! -n "$ZSHRUN" ]]; then
     source $HOME/.zsh_prompt
@@ -132,9 +119,9 @@ if [[ ! -n "$ZSHRUN" ]]; then
     fi
 fi
 
-# }}
+# >>1
 
-#  Aliases {{
+#  Aliases <<1
 #-------------------------------------------------------------------------------
 alias ls='ls -FHG'
 alias ll='ls -lh'
@@ -166,23 +153,25 @@ alias tmuxp='tmux attach -t pair-session || tmux new-session -t host-session -s 
 alias rogue='tmux switch-client -t "pair-session"; tmux display-message "Entering Rogue Mode"'
 alias buddy='tmux switch-client -t "host-session"; tmux display-message "Entering Buddy Mode"'
 alias delete_pyc='find . -name \*.pyc -exec rm \{\} \+'
-# }}
+# >>1
 
-# Functions {{
+# Functions <<1
 #===============================================================================
 
+# Python webserver <<2
 #-------------------------------------------------------------------------------
-#  Python webserver: cd into a directory you want to share and then
-#                    type webshare. You will be able to connect to that directory
-#                    with other machines on the local net work with IP:8000
-#                    the function will display the current machines ip address
+#  cd into a directory you want to share and then
+#  type webshare. You will be able to connect to that directory
+#  with other machines on the local net work with IP:8000
+#  the function will display the current machines ip address
 #-------------------------------------------------------------------------------
 function webshare() {
     local_ip=`hostname -I | cut -d " " -f 1`
     echo "connect to $local_ip:8000"
         python -m SimpleHTTPServer > /dev/null 2>&1
     }
-
+# >>2
+# <<2 Work Timer
 #-------------------------------------------------------------------------------
 # A timer function that will say the message and display a pop-up
 # after the specified amount of time.
@@ -192,7 +181,8 @@ function workTimer() {
     echo -n "What to words_to_say when done => "; read words_to_say
     sleep $duration && say "$words_to_say"
 }
-
+# >>2
+# <<2 Memory Usage
 #-------------------------------------------------------------------------------
 # Shows the specified number of the top memory consuming processes and their PID
 #-------------------------------------------------------------------------------
@@ -201,17 +191,18 @@ function mem_usage() {
     echo ""
     echo "Mem Size       PID     Process"
     echo "============================================================================="
-    ps aux | awk '{ output = sprintf("%5d Mb --> %5s --> %s%s%s%s", $6/1024, $2, $11, $12, $13, $14); print output }' | sort -gr | head --line $number
+    ps aux | awk '{ output = sprintf("%5d Mb --> %5s --> %s%s%s%s", $6/1024, $2, $11, $12, $13, $14); print output }' | sort -gr | head -n $number
     }
-
-
+# >>2
+# <<2 Spell Check
 #------------------------------------------------------------------------------
 # Because, well I need to spell check a lot :\
 #------------------------------------------------------------------------------
 spell (){
     echo $1 | aspell -a
 }
-
+# >>2
+# Workon virtualenv <<2
 #--------------------------------------------------------------------
 # If we cd into a directory that is named the same as a virtualenv
 # auto activate that virtualenv
@@ -228,10 +219,11 @@ workon_virtualenv() {
      fi
   fi
 }
-
+# >>2
+# Workon node env <<2
 #--------------------------------------------------------------------
 # If we cd into a directory that contains a directory named node_modules
-# we automatically recursively add it to the $PATH
+# we automatically add it to the $PATH
 # -------------------------------------------------------------------
 workon_node_env() {
   if [[ -d "node_modules" ]]; then
@@ -247,9 +239,8 @@ workon_node_env() {
     }
   fi
 }
-
-#--------------------------------------------------------------------
-# Run the virtual environments functions for the prompt on each cd
+# >>2
+# Run the virtual environments functions for the prompt on each cd <<2
 # -------------------------------------------------------------------
 cd() {
   builtin cd "$@"
@@ -257,9 +248,8 @@ cd() {
   workon_virtualenv
   workon_node_env
 }
-
-#--------------------------------------------------------------------
-# Search for running processes
+# >>2
+# Search for running processes <<2
 # -------------------------------------------------------------------
 any() {
     emulate -L zsh
@@ -272,9 +262,8 @@ any() {
         ps xauwww | grep -i --color=auto "[${1[1]}]${1[2,-1]}"
     fi
 }
-
-# -------------------------------------------------------------------
-# Display a neatly formatted path good for debugging
+# >>2
+# Display a neatly formatted path <<2
 # -------------------------------------------------------------------
 path() {
 echo $PATH | tr ":" "\n" | \
@@ -285,35 +274,35 @@ echo $PATH | tr ":" "\n" | \
            sub(\"/local\", \"$fg_no_bold[yellow]/local$reset_color\"); \
            print }"
   }
-
-#--------------------------------------------------------------------
-# Displays mounted drive information in a nicely formatted manner
+# >>2
+# Displays mounted drive information in a nicely formatted manner <<2
 # -------------------------------------------------------------------
 function nicemount() {
     (echo "DEVICE PATH TYPE FLAGS" && mount | awk '$2="";1') | column -t ;
 }
-
-#--------------------------------------------------------------------
-# Add the current working directory to the path
-# -------------------------------------------------------------------
-add_current_directory_to_path() {
-    path+=(`pwd`)
+# >>2
+# Source file if it exists <<2
+include () {
+    [[ -s "$1" ]] && source "$1"
 }
+# >>2
+# >>1
 
-# }}
+# Add rmv if exists <<1
+#-------------------------------------------------------------------------------
+include ~/.rvm/scripts/rvm
+# >>1
 
-# Precmd functions {{
+# Add nvm if exists <<1
+#-------------------------------------------------------------------------------
+include ~/.nvm/nvm.sh
+# >>1
+
+# Precmd functions <<1
 #------------------------------------------------------------------------------
 # Run precmd functions so we get our pimped out prompt
 #------------------------------------------------------------------------------
 precmd_functions=( precmd_prompt )
 
-# }}
-
-# Add rmv scripts {{
-#-------------------------------------------------------------------------------
-source ~/.rvm/scripts/rvm
-
-# }}
-
+# >>1
 # EOF
