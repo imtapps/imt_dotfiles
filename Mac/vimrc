@@ -495,7 +495,7 @@ endfunction
 nmap<Leader>tv :call TestVector()<CR>
 
 function! RetestVector()
-    echo g:test_commad
+    exe g:test_commad
 endfunction
 nmap<Leader>rv :call RetestVector()<CR>
 " }1
