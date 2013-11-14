@@ -301,6 +301,7 @@ let NERDTreeIgnore = ['\.pyc$']
 let g:jedi#goto_definitions_command = "<Leader>j"
 let g:jedi#use_tabs_not_buffers = 0     " Use buffers not tabs
 let g:jedi#popup_on_dot = 0
+let g:jedi#rename_command = "<leader>rn"
 " }2
 " Startify configurations {2
 "-----------------------------------------------------------------------------------
