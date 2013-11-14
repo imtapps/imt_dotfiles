@@ -41,7 +41,6 @@ set nocompatible
 " }2
 " Github repos for bundles that we want to have installed {2
 "-----------------------------------------------------------------------------------
- Bundle 'https://github.com/mileszs/ack.vim'
  Bundle 'https://github.com/Shougo/neocomplcache.vim'
  Bundle 'https://github.com/vim-scripts/bash-support.vim'
  Bundle 'https://github.com/Raimondi/delimitMate'
@@ -73,7 +72,6 @@ set nocompatible
  Bundle 'https://github.com/sjl/gundo.vim'
  Bundle 'https://github.com/nelstrom/vim-markdown-folding'
  Bundle 'https://github.com/tpope/vim-markdown'
- Bundle 'https://github.com/JarrodCTaylor/wikilink'
  Bundle 'https://github.com/justinmk/vim-sneak'
 " }2
 " }1
@@ -126,6 +124,7 @@ set wildignore=*.swp,*.bak,*.pyc,*.class,node_modules/**  " wildmenu: ignore the
 set wildmenu                           " Command-line completion in an enhanced mode
 set shell=bash                         " Required to let zsh know how to run things on command line
 set ttimeoutlen=50                     " Fix delay when escaping from insert with Esc
+set noshowmode                         " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 " }2
 " Set the minimum number of lines above and below the cursor {2
 "-----------------------------------------------------------------------------------
@@ -487,4 +486,15 @@ imap <C-e> <C-o>$
 imap <C-a> <C-o>0
 imap <C-f> <C-o>l
 imap <C-b> <C-o>h
+
+function! TestVector()
+    let g:test_commad = '!python src/manage.py test test ' . expand('%:p')
+    exe g:test_commad
+endfunction
+nmap<Leader>tv :call TestVector()<CR>
+
+function! RetestVector()
+    echo g:test_commad
+endfunction
+nmap<Leader>rv :call RetestVector()<CR>
 " }1
