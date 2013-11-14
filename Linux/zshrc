@@ -299,4 +299,9 @@ include ~/.nvm/nvm.sh
 precmd_functions=( precmd_prompt )
 
 # >>1
+
+# Tmux Ctrl-S fix <<1
+#------------------------------------------------------------------------------
+stty -ixon
+# >>1
 # EOF
