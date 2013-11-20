@@ -115,7 +115,8 @@ set nowrap                             " Do not wrap lines
 set popt=left:8pc,right:3pc            " Print options
 set shiftwidth=4                       " Number of spaces to use for each step of indent
 set showcmd                            " Display incomplete commands in the bottom line of the screen
-set smartcase                          " Ignore case if search pattern is all lowercase, case_sensitive otherwise
+set ignorecase                         " Ignore case when searching....
+set smartcase                          " ...unless uppercase letter are used
 set tabstop=4                          " Number of spaces that a <Tab> counts for
 set expandtab                          " Make vim use spaces and not tabs
 set undolevels=1000                    " Never can be too careful when it comes to undoing
