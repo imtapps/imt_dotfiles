@@ -153,6 +153,7 @@ alias tmuxp='tmux attach -t pair-session || tmux new-session -t host-session -s 
 alias rogue='tmux switch-client -t "pair-session"; tmux display-message "Entering Rogue Mode"'
 alias buddy='tmux switch-client -t "host-session"; tmux display-message "Entering Buddy Mode"'
 alias delete_pyc='find . -name \*.pyc -exec rm \{\} \+'
+alias c='clear'
 # >>1
 
 # Functions <<1
