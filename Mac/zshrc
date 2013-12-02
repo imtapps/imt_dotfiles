@@ -10,6 +10,20 @@
 #===================================================================================
 #
 
+# Setup antigen <<1
+#-------------------------------------------------------------------------------
+if [[ ! -s ~/.antigen.zsh ]]
+then
+    curl https://raw.github.com/zsh-users/antigen/master/antigen.zsh > .antigen.zsh
+fi
+source ~/.antigen.zsh
+# >>1
+
+# set antigen bundles <<1
+#-------------------------------------------------------------------------------
+antigen bundle zsh-users/zsh-syntax-highlighting
+# <<1
+
 # General Settings <<1
 # Autoload colors and tab completion <<2
 #-------------------------------------------------------------------------------
@@ -110,15 +124,7 @@ bindkey '^H' backward-delete-char
 #-------------------------------------------------------------------------------
 if [[ ! -n "$ZSHRUN" ]]; then
     source $HOME/.zsh_prompt
-
-    if [[ -f $HOME/zsh-syntax-highlighting.zsh ]]; then
-        source $HOME/zsh-syntax-highlighting.zsh
-        ZSH_HIGHLIGHT_HIGHLIGHTERS+=( brackets pattern cursor )
-    else
-        echo "No highlighting Son!!"
-    fi
 fi
-
 # >>1
 
 #  Aliases <<1
