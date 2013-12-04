@@ -60,7 +60,6 @@ set nocompatible
  Bundle 'https://github.com/davidhalter/jedi-vim'
  Bundle 'https://github.com/mhinz/vim-startify'
  Bundle 'https://github.com/tpope/vim-surround'
- Bundle 'https://github.com/jmcantrell/vim-virtualenv.git'
  Bundle 'https://github.com/nono/vim-handlebars'
  Bundle 'https://github.com/JarrodCTaylor/vim-python-test-runner'
  Bundle 'https://github.com/tpope/vim-rails'
