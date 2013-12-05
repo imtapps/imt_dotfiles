@@ -60,7 +60,7 @@ set nocompatible
  Bundle 'https://github.com/davidhalter/jedi-vim'
  Bundle 'https://github.com/mhinz/vim-startify'
  Bundle 'https://github.com/tpope/vim-surround'
- Bundle 'https://github.com/nono/vim-handlebars'
+ Bundle 'https://github.com/mustache/vim-mustache-handlebars'
  Bundle 'https://github.com/JarrodCTaylor/vim-python-test-runner'
  Bundle 'https://github.com/tpope/vim-rails'
  Bundle 'https://github.com/tmhedberg/SimpylFold'
@@ -155,6 +155,14 @@ if has("autocmd")
         \   exe "normal! g`\"" |
         \ endif
 endif
+
+" Mustache/Handlebars abbreviations
+let g:mustache_abbreviations = 1
+
+if has("autocmd")
+  au BufNewFile,BufRead *.{mustache,handlebars,hbs}{,.erb} set filetype=html syntax=mustache | runtime! ftplugin/mustache.vim ftplugin/mustache*.vim ftplugin/mustache/*.vim
+endif
+
 " }2
 " Make arrowkey resize viewports {2
 "-----------------------------------------------------------------------------------
@@ -244,7 +252,7 @@ nnoremap<Leader>nc :NosetestClass<CR>
 nnoremap<Leader>nm :NosetestMethod<CR>
 nnoremap<Leader>rr :RerunLastTests<CR>
 " --- grunt-karma test runner shortcut
-map <Leader>q :!grunt test<CR>"
+map <Leader>q :!karma start<CR>"
 " --- Toggle relative line numbering
 nnoremap<Leader>tn :set relativenumber!<CR>
 " --- Shortcut to RenameFile function defined below
@@ -454,7 +462,7 @@ map <Leader>fb :CtrlPBuffer<CR>
 " --- go to the last file you had open
 nmap <Leader><Leader> <c-^>
 " --- grunt-karma test runner shortcut
-map <Leader>q :!grunt test<CR>
+map <Leader>q :!karma start<CR>
 " --- ,ed Shortcut to edit .vimrc file on the fly on a vertical window
 nnoremap <Leader>ed <C-w><C-v><C-l>:e $MYVIMRC<CR>
 " --- Easy motion
