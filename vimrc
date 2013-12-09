@@ -73,6 +73,7 @@ set nocompatible
  Bundle 'https://github.com/tpope/vim-markdown'
  Bundle 'https://github.com/justinmk/vim-sneak'
  Bundle 'https://github.com/JarrodCTaylor/vim-shell-executor'
+ Bundle 'https://github.com/epeli/slimux'
 " }2
 " }1
 
