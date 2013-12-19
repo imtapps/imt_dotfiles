@@ -37,6 +37,7 @@ ln -s ~/imt_dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -s ~/imt_dotfiles/zsh/zshrc ~/.zshrc
 ln -s ~/imt_dotfiles/ackrc ~/.ackrc
 ln -s ~/imt_dotfiles/gitconfig ~/.gitconfig
+ls -s ~/imt_dotfiles/gemrc ~/.gemrc
 
 # If vundle doesn't exist clone it so we can update vim plugins
 if [ ! -d ~/imt_dotfiles/vim/bundle/vundle ]; then
