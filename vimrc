@@ -230,6 +230,10 @@ nnoremap <Leader>- :split<CR>
 nnoremap <Leader>a :Ack!<space>
 " --- Toggle Syntastic
 nnoremap <Leader>ts :SyntasticToggleMode<CR>
+" --- Retrieve Syntastic errors
+nnoremap <Leader>fe :Errors<CR>
+" --- Jump to next Syntastic error
+nnoremap <Leader>fn :lnext<CR>
 " --- Clear the search buffer and highlighted text with enter press
 :nnoremap <Space> :nohlsearch<CR>
 " --- Search the ctags index file for anything by class or method name
