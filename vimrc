@@ -387,7 +387,7 @@ let g:markdown_fold_style = 'nested'
 " }2
 " Vim-Markdown {2
 "-----------------------------------------------------------------------------------
-let g:markdown_fenced_languages = ['python', 'sh', 'vim', 'javascript', 'html', 'clojure', 'css', 'c', 'sql', 'java']
+let g:markdown_fenced_languages = ['python', 'sh', 'vim', 'javascript', 'html', 'css', 'c', 'sql']
 "}2
 " Vim-Sneak {2
 "-----------------------------------------------------------------------------------
