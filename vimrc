@@ -89,7 +89,7 @@ filetype  indent on
 " Color scheme {2
 "-----------------------------------------------------------------------------------
 set t_Co=256
-colorscheme understated
+colorscheme knuckleduster
 " }2
 " Switch syntax highlighting on. {2
 "-----------------------------------------------------------------------------------
@@ -433,6 +433,58 @@ function! RenameFile()
         redraw!
     endif
 endfunction
+" }2
+" Highlight matches when jumping to next {2
+nnoremap <silent> n   n:call HLNext(0.4)<cr>
+nnoremap <silent> N   N:call HLNext(0.4)<cr>
+
+function! HLNext (blinktime)
+    highlight HighlightStyle ctermfg=none ctermbg=160 cterm=none
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    let target_pat = '\c\%#'.@/
+    let ring = matchadd('HighlightStyle', target_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 500) . 'm'
+    call matchdelete(ring)
+    redraw
+endfunction
+" }2
+" Nohassle Paste {2
+" Code totally boosted from Tim Pope
+function! s:setup_paste() abort
+  let s:paste = &paste
+  set paste
+endfunction
+
+nnoremap <silent> <Plug>unimpairedPaste :call <SID>setup_paste()<CR>
+nnoremap <silent> yp  :call <SID>setup_paste()<CR>a
+nnoremap <silent> yP  :call <SID>setup_paste()<CR>i
+nnoremap <silent> yo  :call <SID>setup_paste()<CR>o
+nnoremap <silent> yO  :call <SID>setup_paste()<CR>O
+nnoremap <silent> yA  :call <SID>setup_paste()<CR>A
+nnoremap <silent> yI  :call <SID>setup_paste()<CR>I
+
+augroup unimpaired_paste
+  autocmd!
+  autocmd InsertLeave *
+        \ if exists('s:paste') |
+        \   let &paste = s:paste |
+        \   unlet s:paste |
+        \ endif
+augroup END
+" }2
+" Increment a column of number {2
+fu! Incr()
+    let a = line('.') - line("'<")
+    let c = virtcol("'<")
+    if a > 0
+        execute 'normal! '.c.'|'.a."\<C-a>"
+    endif
+    normal `<
+endfu
+
+vnoremap <C-a> :call Incr()<CR>
 " }2
 " }1
 
