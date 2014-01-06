@@ -65,8 +65,6 @@ set nocompatible
  Bundle 'https://github.com/tpope/vim-rails'
  Bundle 'https://github.com/tmhedberg/SimpylFold'
  Bundle 'https://github.com/bling/vim-airline'
- Bundle 'https://github.com/kien/rainbow_parentheses.vim'
- Bundle 'https://github.com/tpope/vim-fireplace'
  Bundle 'https://github.com/JarrodCTaylor/vim-js2coffee'
  Bundle 'https://github.com/sjl/gundo.vim'
  Bundle 'https://github.com/nelstrom/vim-markdown-folding'
@@ -349,29 +347,6 @@ let g:startify_show_files = 1
 let g:startify_show_files_number = 10
 " A list of files to bookmark. Always shown
 let g:startify_bookmarks = [ '~/.vimrc' ]
-" }2
-" Rainbow Parentheses {2
-"-----------------------------------------------------------------------------------
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-let g:rbpt_max = 16
-let g:rbpt_loadcmd_toggle = 0
 " }2
 " SuperTab {2
 "-----------------------------------------------------------------------------------
