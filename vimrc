@@ -42,7 +42,6 @@ set nocompatible
 " Github repos for bundles that we want to have installed {2
 "-----------------------------------------------------------------------------------
  Bundle 'https://github.com/Shougo/neocomplcache.vim'
- Bundle 'https://github.com/vim-scripts/bash-support.vim'
  Bundle 'https://github.com/Raimondi/delimitMate'
  Bundle 'https://github.com/vim-scripts/L9'
  Bundle 'https://github.com/scrooloose/nerdtree'
