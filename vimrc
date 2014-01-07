@@ -254,7 +254,7 @@ nnoremap<Leader>nc :NosetestClass<CR>
 nnoremap<Leader>nm :NosetestMethod<CR>
 nnoremap<Leader>rr :RerunLastTests<CR>
 " --- grunt-karma test runner shortcut
-map <Leader>q :!karma start<CR>"
+map <Leader>q :!grunt test<CR>"
 " --- Toggle relative line numbering
 nnoremap<Leader>tn :set relativenumber!<CR>
 " --- Shortcut to RenameFile function defined below
@@ -493,7 +493,7 @@ map <Leader>fb :CtrlPBuffer<CR>
 " --- go to the last file you had open
 nmap <Leader><Leader> <c-^>
 " --- grunt-karma test runner shortcut
-map <Leader>q :!karma start<CR>
+map <Leader>q :!grunt test<CR>
 " --- ,ed Shortcut to edit .vimrc file on the fly on a vertical window
 nnoremap <Leader>ed <C-w><C-v><C-l>:e $MYVIMRC<CR>
 " --- Easy motion
