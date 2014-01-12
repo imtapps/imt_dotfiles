@@ -477,6 +477,19 @@ func! s:DeleteBuffer()
     exec "norm \<F5>"
 endfunc
 " }2
+" Toggle checkboxs {2
+function! ToggleTodoCheckbox()
+        let line = getline('.')
+        if(match(line, "\\[ \\]") != -1)
+          let line = substitute(line, "\\[ \\]", "[√]", "")
+          let line = substitute(line, "$", " @done (" . strftime("%d/%m/%y %H:%M") . ")", "")
+        elseif(match(line, "\\[√\\]") != -1)
+          let line = substitute(line, "\\[√\\]", "[ ]", "")
+          let line = substitute(line, " @done.*$", "", "")
+        endif
+        call setline('.', line)
+endfunction
+" }2
 " }1
 
 " Key Bindings For The Others (Everyone who is not Jarrod) AT IMT {1
