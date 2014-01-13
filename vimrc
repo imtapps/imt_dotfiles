@@ -265,6 +265,8 @@ map <Leader>rf :call RenameFile()<CR>
 map <Leader>cf :call CopyFile()<CR>
 " --- Shortcut to toggle visual undo
 nnoremap<Leader>u :GundoToggle<CR>
+" --- Toggle Checkboxes
+nnoremap <Leader>tc :call ToggleTodoCheckbox()<CR>
 " }2
 " }1
 
