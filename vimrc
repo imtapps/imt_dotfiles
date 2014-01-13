@@ -515,6 +515,9 @@ map <Leader>ta :DjangoTestApp<CR>
 map <Leader>tf :DjangoTestFile<CR>
 map <Leader>tc :DjangoTestClass<CR>
 map <Leader>tm :DjangoTestMethod<CR>
+map<Leader>nf :NosetestFile<CR>
+map<Leader>nc :NosetestClass<CR>
+map<Leader>nm :NosetestMethod<CR>
 nnoremap<Leader>ta :RerunLastTests<CR>
 " --- search the ctags index file for anything by class or method name
 map <Leader>fs :CtrlPTag<CR>
