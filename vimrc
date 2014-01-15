@@ -234,7 +234,7 @@ nnoremap <Leader>fe :Errors<CR>
 " --- Jump to next Syntastic error
 nnoremap <Leader>fn :lnext<CR>
 " --- Clear the search buffer and highlighted text with enter press
-:nnoremap <Space> :nohlsearch<CR>
+nnoremap <Space> :nohlsearch<CR>
 " --- Search the ctags index file for anything by class or method name
 map <Leader>st :CtrlPTag<CR>
 " --- Refresh the ctags file
@@ -499,8 +499,6 @@ endfunction
 let mapleader=","
 " --- open Ctrlp as a fuzzy finder
 nnoremap <Leader>ff :CtrlP<CR>
-" --- shortcut to save the current document
-map .. :w<CR>
 " -- spell check
 noremap <Leader>sp :set spell spelllang=en_us<CR>
 " --- toggle Tagbar
@@ -544,12 +542,6 @@ nnoremap <Leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 " --- jj and jk For Qicker Escaping between normal and editing mode
 inoremap jj <ESC>
 inoremap jk <ESC>
-" Copy current buffer path relative to root of VIM session to system clipboard
-nnoremap <Leader>yp :let @" = expand("%:p")"<CR>:echo "Copied file path to clipboard"<CR>
-" Copy current filename to system clipboard
-nnoremap <Leader>yf :let @"=expand("%:t")<CR>:echo "Copied file name to clipboard"<CR>
-" Copy current buffer path without filename to system clipboard
-nnoremap <Leader>yd :let @"=expand("%:h")<CR>:echo "Copied file directory to clipboard"<CR>
 " --- Toggle relative line numbering
 nnoremap<Leader>tn :set relativenumber!<CR>
 " --- Shortcut to surround inner words
