@@ -267,6 +267,10 @@ map <Leader>cf :call CopyFile()<CR>
 nnoremap<Leader>u :GundoToggle<CR>
 " --- Toggle Checkboxes
 nnoremap <Leader>tc :call ToggleTodoCheckbox()<CR>
+nnoremap 9q :call QuickfixToggle()<cr>
+" --- Shortcuts for quickfix as it was broken for some reason
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> :.ccl<CR>
+autocmd BufReadPost quickfix nnoremap <buffer> o :.cc<CR>
 " }2
 " }1
 
@@ -490,6 +494,21 @@ function! ToggleTodoCheckbox()
           let line = substitute(line, " @done.*$", "", "")
         endif
         call setline('.', line)
+endfunction
+" }2
+" Toggle Quickfix {2
+let g:quickfix_is_open = 0
+
+function! QuickfixToggle()
+    if g:quickfix_is_open
+        cclose
+        let g:quickfix_is_open = 0
+        execute g:quickfix_return_to_window . "wincmd w"
+    else
+        let g:quickfix_return_to_window = winnr()
+        copen
+        let g:quickfix_is_open = 1
+    endif
 endfunction
 " }2
 " }1
