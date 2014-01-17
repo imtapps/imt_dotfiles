@@ -379,6 +379,7 @@ let g:markdown_fenced_languages = ['python', 'sh', 'vim', 'javascript', 'html', 
 "-----------------------------------------------------------------------------------
 nmap f <Plug>SneakForward
 nmap F <Plug>SneakBackward
+let g:sneak#streak = 1
 "}2
 " }1
 
