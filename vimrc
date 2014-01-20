@@ -512,6 +512,12 @@ function! QuickfixToggle()
     endif
 endfunction
 " }2
+" Format JSON {2
+function! FormatJSON()
+    :'<,'>!python -m json.tool
+endfunction
+command! -range FormatJSON call FormatJSON()
+" }2
 " }1
 
 " Key Bindings For The Others (Everyone who is not Jarrod) AT IMT {1
