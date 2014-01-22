@@ -380,6 +380,8 @@ let g:markdown_fenced_languages = ['python', 'sh', 'vim', 'javascript', 'html', 
 nmap f <Plug>SneakForward
 nmap F <Plug>SneakBackward
 let g:sneak#streak = 1
+" We need 52 characters for this
+let g:sneak#target_labels = "sdfgkqwetyupzcvbnmSDFGHJKLQWERTYUPZXCVBNM123456789rx"
 "}2
 " }1
 
