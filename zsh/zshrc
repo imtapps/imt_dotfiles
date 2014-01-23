@@ -51,6 +51,7 @@ antigen bundle spell
 antigen bundle workon_node_env
 antigen bundle workon_virtualenv
 antigen bundle cd
+antigen bundle sex_move_generator
 # >>1
 
 # General Settings <<1
