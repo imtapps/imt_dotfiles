@@ -3,3 +3,4 @@
 --type-set=coffeescript=.coffee
 --type=coffeescript
 --type=python
+--type=ruby
