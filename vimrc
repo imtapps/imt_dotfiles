@@ -86,7 +86,7 @@ filetype  indent on
 " Color scheme {2
 "-----------------------------------------------------------------------------------
 set t_Co=256
-colorscheme knuckleduster
+colorscheme understated
 " }2
 " Switch syntax highlighting on. {2
 "-----------------------------------------------------------------------------------
@@ -206,47 +206,27 @@ let g:airline#extensions#virtualenv#enabled = 0
 "===================================================================================
 " }2
 " Key mappings {2
-" --- change mapleader from \ to 9 as I find that easier to type
 let mapleader="9"
-" --- jk mapped to <Esc> so we can keep our fingers on the home row
 imap jk <Esc>
-" --- ss will toggle spell checking
 map ss :setlocal spell!<CR>
-" --- toggle NERDTree
 nnoremap <Leader>nt :NERDTreeToggle<CR>
 nnoremap <Leader>no :NERDTreeFind<CR>
-" --- toggle Tagbar
 nnoremap <Leader>tb :TagbarToggle<CR>
-" --- open CtrlP buffer explorer
 nnoremap <Leader>b :CtrlPBuffer<CR>
-" --- open Ctrlp as a fuzzy finder
 nnoremap <Leader>ff :CtrlP<CR>
-" --- Split the window vertically
 nnoremap <Leader>\ :vsplit<CR>
-" --- Split the window horizontally
 nnoremap <Leader>- :split<CR>
-" --- Ack short cut
 nnoremap <Leader>a :Ack!<space>
-" --- Toggle Syntastic
 nnoremap <Leader>ts :SyntasticToggleMode<CR>
-" --- Retrieve Syntastic errors
 nnoremap <Leader>fe :Errors<CR>
-" --- Jump to next Syntastic error
 nnoremap <Leader>fn :lnext<CR>
-" --- Clear the search buffer and highlighted text with enter press
 nnoremap <Space> :nohlsearch<CR>
-" --- Search the ctags index file for anything by class or method name
 map <Leader>st :CtrlPTag<CR>
-" --- Refresh the ctags file
 nnoremap <Leader>rt :call RenewTagsFile()<CR>
-" --- Strip trailing whitespace
-nnoremap <Leader>W :%s/\s\+$//<CR>:let @/=''<CR>
-" --- Better window navigation E.g. now use Ctrl+j instead of Ctrl+W+j
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
-" --- Shortcuts for test running commands
 nnoremap<Leader>da :DjangoTestApp<CR>
 nnoremap<Leader>df :DjangoTestFile<CR>
 nnoremap<Leader>dc :DjangoTestClass<CR>
@@ -255,22 +235,18 @@ nnoremap<Leader>nf :NosetestFile<CR>
 nnoremap<Leader>nc :NosetestClass<CR>
 nnoremap<Leader>nm :NosetestMethod<CR>
 nnoremap<Leader>rr :RerunLastTests<CR>
-" --- grunt-karma test runner shortcut
 map <Leader>q :!grunt test<CR>"
-" --- Toggle relative line numbering
 nnoremap<Leader>tn :set relativenumber!<CR>
-" --- Shortcut to RenameFile function defined below
 map <Leader>rf :call RenameFile()<CR>
-" --- Shortcut to CopyFile function defined below
 map <Leader>cf :call CopyFile()<CR>
-" --- Shortcut to toggle visual undo
 nnoremap<Leader>u :GundoToggle<CR>
-" --- Toggle Checkboxes
 nnoremap <Leader>tc :call ToggleTodoCheckbox()<CR>
 nnoremap 9q :call QuickfixToggle()<cr>
 " --- Shortcuts for quickfix as it was broken for some reason
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> :.cc<CR>
 autocmd BufReadPost quickfix nnoremap <buffer> o :.cc<CR>
+" --- Strip trailing whitespace
+nnoremap <Leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 " }2
 " }1
 
@@ -387,6 +363,7 @@ let g:sneak#target_labels = "sdfgkqwetyupzcvbnmSDFGHJKLQWERTYUPZXCVBNM123456789r
 
 " Misc Functions {1
 " RenewTagsFile {2
+"-----------------------------------------------------------------------------------
 function! RenewTagsFile()
     exe 'silent !rm -rf .ctags'
     exe 'silent !coffeetags --include-vars -Rf .ctags'
@@ -396,6 +373,7 @@ function! RenewTagsFile()
 endfunction
 " }2
 " SortLines {2
+"-----------------------------------------------------------------------------------
 function! SortLines() range
     execute a:firstline . "," . a:lastline . 's/^\(.*\)$/\=strdisplaywidth( submatch(0) ) . " " . submatch(0)/'
     execute a:firstline . "," . a:lastline . 'sort n'
@@ -403,6 +381,7 @@ function! SortLines() range
 endfunction
 " }2
 " CopyFile {2
+"-----------------------------------------------------------------------------------
 function! CopyFile()
     let old_name = expand('%')
     let new_name = input('New file name: ', expand('%'), 'file')
@@ -413,6 +392,7 @@ function! CopyFile()
 endfunction
 " }2
 " RenameFile {2
+"-----------------------------------------------------------------------------------
 function! RenameFile()
     let old_name = expand('%')
     let new_name = input('New file name: ', expand('%'), 'file')
@@ -424,6 +404,7 @@ function! RenameFile()
 endfunction
 " }2
 " Highlight matches when jumping to next {2
+"-----------------------------------------------------------------------------------
 nnoremap <silent> n   n:call HLNext(0.4)<cr>
 nnoremap <silent> N   N:call HLNext(0.4)<cr>
 
@@ -440,6 +421,7 @@ function! HLNext (blinktime)
 endfunction
 " }2
 " Nohassle Paste {2
+"-----------------------------------------------------------------------------------
 " Code totally boosted from Tim Pope
 function! s:setup_paste() abort
   let s:paste = &paste
@@ -464,29 +446,31 @@ augroup unimpaired_paste
 augroup END
 " }2
 " Increment a column of number {2
-fu! Incr()
+"-----------------------------------------------------------------------------------
+function! Incr()
     let a = line('.') - line("'<")
     let c = virtcol("'<")
     if a > 0
         execute 'normal! '.c.'|'.a."\<C-a>"
     endif
     normal `<
-endfu
+endfunction
 
 vnoremap <C-a> :call Incr()<CR>
 " }2
 " DeleteBuffer {2
 "-----------------------------------------------------------------------------------
 " Custom function to delete buffers from within Ctrl-P
-func! s:DeleteBuffer()
+function! s:DeleteBuffer()
     let line = getline('.')
     let bufid = line =~ '\[\d\+\*No Name\]$' ? str2nr(matchstr(line, '\d\+'))
         \ : fnamemodify(line[2:], ':p')
     exec "bd" bufid
     exec "norm \<F5>"
-endfunc
+endfunction
 " }2
 " Toggle checkboxs {2
+"-----------------------------------------------------------------------------------
 function! ToggleTodoCheckbox()
         let line = getline('.')
         if(match(line, "\\[ \\]") != -1)
@@ -500,6 +484,7 @@ function! ToggleTodoCheckbox()
 endfunction
 " }2
 " Toggle Quickfix {2
+"-----------------------------------------------------------------------------------
 let g:quickfix_is_open = 0
 
 function! QuickfixToggle()
@@ -515,6 +500,7 @@ function! QuickfixToggle()
 endfunction
 " }2
 " Format JSON {2
+"-----------------------------------------------------------------------------------
 function! FormatJSON()
     :'<,'>!python -m json.tool
 endfunction
@@ -525,18 +511,12 @@ command! -range FormatJSON call FormatJSON()
 " Key Bindings For The Others (Everyone who is not Jarrod) AT IMT {1
 "===================================================================================
 let mapleader=","
-" --- open Ctrlp as a fuzzy finder
 nnoremap <Leader>ff :CtrlP<CR>
-" -- spell check
 noremap <Leader>sp :set spell spelllang=en_us<CR>
-" --- toggle Tagbar
 nnoremap <Leader>tb :TagbarToggle<CR>
-" --- like grep on steroids
 map <Leader>a :Ack!<space>
-" --- basic file system navigation view
 map <Leader>d :NERDTreeToggle<CR>
 nmap <Leader>nt :NERDTreeFind<CR>
-" --- python unit testing shortcuts
 map <Leader>ta :DjangoTestApp<CR>
 map <Leader>tf :DjangoTestFile<CR>
 map <Leader>tc :DjangoTestClass<CR>
@@ -545,36 +525,20 @@ map<Leader>nf :NosetestFile<CR>
 map<Leader>nc :NosetestClass<CR>
 map<Leader>nm :NosetestMethod<CR>
 nnoremap<Leader>ta :RerunLastTests<CR>
-" --- search the ctags index file for anything by class or method name
 map <Leader>fs :CtrlPTag<CR>
-" --- search all files in the current files directory
 map <Leader>fd :CtrlPCurFile<CR>
-" --- search all the files you have open in your vim buffer
 map <Leader>fb :CtrlPBuffer<CR>
-" --- go to the last file you had open
 nmap <Leader><Leader> <c-^>
-" --- grunt-karma test runner shortcut
 map <Leader>q :!grunt test<CR>
-" --- ,ed Shortcut to edit .vimrc file on the fly on a vertical window
 nnoremap <Leader>ed <C-w><C-v><C-l>:e $MYVIMRC<CR>
-" --- Easy motion
 let g:EasyMotion_leader_key = '<Leader>l'
-" --- Shortcut to RenameFile function defined above
 map <Leader>rf :call RenameFile()<CR>
-" --- Shortcut to CopyFile function defined above
 map <Leader>cf :call CopyFile()<CR>
-" --- re-index the ctags file
 nnoremap <Leader>ri :call RenewTagsFile()<CR>
-" --- Strip trailing whitespace
-nnoremap <Leader>W :%s/\s\+$//<CR>:let @/=''<CR>
-" --- jj and jk For Qicker Escaping between normal and editing mode
 inoremap jj <ESC>
 inoremap jk <ESC>
-" --- Toggle relative line numbering
 nnoremap<Leader>tn :set relativenumber!<CR>
-" --- Shortcut to surround inner words
 nmap<Leader>s ysiw
-" --- Shortcut to toggle visual undo
 nnoremap<Leader>u :GundoToggle<CR>
 " --- Emacs keys in insert mode
 " May the programming gods forgive me for these four lines
@@ -582,6 +546,8 @@ imap <C-e> <C-o>$
 imap <C-a> <C-o>0
 imap <C-f> <C-o>l
 imap <C-b> <C-o>h
+" --- Strip trailing whitespace
+nnoremap <Leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 
 function! TestVector()
     let g:test_commad = '!python src/manage.py test test ' . expand('%:p')
