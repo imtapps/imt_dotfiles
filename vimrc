@@ -71,6 +71,7 @@ set nocompatible
  Bundle 'https://github.com/justinmk/vim-sneak'
  Bundle 'https://github.com/JarrodCTaylor/vim-shell-executor'
  Bundle 'https://github.com/epeli/slimux'
+ Bundle 'and://github.com/JarrodCTaylor/vim-qunit-special-blend'
 " }2
 " }1
 
@@ -218,35 +219,36 @@ nnoremap <Leader>\ :vsplit<CR>
 nnoremap <Leader>- :split<CR>
 nnoremap <Leader>a :Ack!<space>
 nnoremap <Leader>ts :SyntasticToggleMode<CR>
-nnoremap <Leader>fe :Errors<CR>
-nnoremap <Leader>fn :lnext<CR>
 nnoremap <Space> :nohlsearch<CR>
-map <Leader>st :CtrlPTag<CR>
 nnoremap <Leader>rt :call RenewTagsFile()<CR>
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
-nnoremap<Leader>da :DjangoTestApp<CR>
-nnoremap<Leader>df :DjangoTestFile<CR>
-nnoremap<Leader>dc :DjangoTestClass<CR>
-nnoremap<Leader>dm :DjangoTestMethod<CR>
-nnoremap<Leader>nf :NosetestFile<CR>
-nnoremap<Leader>nc :NosetestClass<CR>
-nnoremap<Leader>nm :NosetestMethod<CR>
-nnoremap<Leader>rr :RerunLastTests<CR>
-map <Leader>q :!grunt test<CR>"
-nnoremap<Leader>tn :set relativenumber!<CR>
-map <Leader>rf :call RenameFile()<CR>
-map <Leader>cf :call CopyFile()<CR>
-nnoremap<Leader>u :GundoToggle<CR>
+nnoremap <Leader>da :DjangoTestApp<CR>
+nnoremap <Leader>df :DjangoTestFile<CR>
+nnoremap <Leader>dc :DjangoTestClass<CR>
+nnoremap <Leader>dm :DjangoTestMethod<CR>
+nnoremap <Leader>nf :NosetestFile<CR>
+nnoremap <Leader>nc :NosetestClass<CR>
+nnoremap <Leader>nm :NosetestMethod<CR>
+nnoremap <Leader>rr :RerunLastTests<CR>
+nnoremap <Leader>tn :set relativenumber!<CR>:set number!<CR>
+nnoremap <Leader>ud :GundoToggle<CR>
 nnoremap <Leader>tc :call ToggleTodoCheckbox()<CR>
-nnoremap 9q :call QuickfixToggle()<cr>
+nnoremap <Leader>q :call QuickfixToggle()<CR>
+nnoremap <Leader>eb :ExecuteBuffer<CR>
+nnoremap <Leader>es :ExecuteSelection<CR>
+nnoremap <Leader>ja :RunAllQunitTests<CR>
+nnoremap <Leader>jt :RunSingleQunitTest<CR>
+nnoremap <Leader>jm :RunSingleQunitModule<CR>
 " --- Shortcuts for quickfix as it was broken for some reason
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> :.cc<CR>
 autocmd BufReadPost quickfix nnoremap <buffer> o :.cc<CR>
 " --- Strip trailing whitespace
 nnoremap <Leader>W :%s/\s\+$//<CR>:let @/=''<CR>
+" --- Save changes to a readonly file with sudo
+cmap w!! w !sudo tee %
 " }2
 " }1
 
