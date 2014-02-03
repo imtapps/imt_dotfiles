@@ -563,4 +563,36 @@ function! RetestVector()
     exe g:test_commad
 endfunction
 nmap<Leader>rv :call RetestVector()<CR>
+
+nmap <Leader>tm :call InvokeTestMethodByType()<CR>
+function! InvokeTestMethodByType()
+    let filetype=&ft
+    if filetype == 'python'
+        exe ':DjangoTestMethod'
+    else
+        exe ':RunSingleQunitTest'
+    endif
+endfunction
+
+nmap <Leader>tc :call InvokeTestClassByType()<CR>
+function! InvokeTestClassByType()
+    let filetype=&ft
+    if filetype == 'python'
+        exe ':DjangoTestClass'
+    else
+        exe ':RunSingleQunitModule'
+    endif
+endfunction
+
+nmap <Leader>tf :call InvokeTestFileByType()<CR>
+function! InvokeTestFileByType()
+    let filetype=&ft
+    if filetype == 'python'
+        exe ':DjangoTestFile'
+    else
+        exe ':RunAllQunitTests'
+    endif
+endfunction
+
+
 " }1
