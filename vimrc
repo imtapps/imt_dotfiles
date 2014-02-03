@@ -71,7 +71,7 @@ set nocompatible
  Bundle 'https://github.com/justinmk/vim-sneak'
  Bundle 'https://github.com/JarrodCTaylor/vim-shell-executor'
  Bundle 'https://github.com/epeli/slimux'
- Bundle 'and://github.com/JarrodCTaylor/vim-qunit-special-blend'
+ Bundle 'https://github.com/JarrodCTaylor/vim-qunit-special-blend'
 " }2
 " }1
 
