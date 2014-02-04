@@ -242,6 +242,7 @@ nnoremap <Leader>es :ExecuteSelection<CR>
 nnoremap <Leader>ja :RunAllQunitTests<CR>
 nnoremap <Leader>jt :RunSingleQunitTest<CR>
 nnoremap <Leader>jm :RunSingleQunitModule<CR>
+nnoremap Y y$
 " --- Shortcuts for quickfix as it was broken for some reason
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> :.cc<CR>
 autocmd BufReadPost quickfix nnoremap <buffer> o :.cc<CR>
